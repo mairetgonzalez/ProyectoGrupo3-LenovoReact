@@ -10,8 +10,8 @@ import Select, { components as RSComponents } from 'react-select';
  * - Isso evita problemas com caminhos relativos (../../...) e funciona bem em build.
  * - Use quando as imagens estão em `src/assets/...`.
  */
-const flagES = new URL('../../assets/flags/flag-eeuu.png', import.meta.url).href;
-const flagUS = new URL('../../assets/flags/flag-ingles.png', import.meta.url).href;
+const flagES = new URL('../../assets/flags/flag-espanhol.png', import.meta.url).href;
+const flagUS = new URL('../../assets/flags/flag-eeuu.png', import.meta.url).href;
 const flagBR = new URL('../../assets/flags/flag-portugues.png', import.meta.url).href;
 
 /**
