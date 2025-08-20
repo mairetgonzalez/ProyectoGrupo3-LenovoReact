@@ -1,0 +1,177 @@
+/* 🎨 Estilo geral do Footer */
+.footer {
+  background: #ededed;                             /* Fallback direto */
+  background: var(--lenovo-light-gray) !important; /* Cinza oficial Lenovo */
+  padding: var(--space-6) var(--space-6);          /* Espaço vertical e lateral */
+  font-size: 14px;
+}
+
+/* 🧭 Faixa superior: 3 colunas (esq | centro | dir) */
+.footer__container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;  /* esquerda 1fr | centro auto | direita 1fr */
+  align-items: center;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto var(--space-6) auto;
+  padding: 0 16px;
+}
+/*.footer-left  { justify-self: start; }*/
+.footer-center{ justify-self: center; }
+.footer-right { justify-self: end; }
+
+/* 📧 Newsletter */
+.footer-newsletter h3{ 
+  color: black;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+/* 🇧🇷 Container do campo (parece um input único com seta) */
+.newsletter-field {
+  position: relative;
+  width: 280px;                         /* largura aproximada da imagem */
+  background: var(--white);
+  border: 1px solid var(--lenovo-gray); /* borda suave */
+  border-radius: var(--radius);         /* cantos arredondados */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06); /* leve relevo como no exemplo */
+  display: flex;
+  align-items: center;
+}
+
+/* 🇧🇷 O input fica “limpo” dentro do container */
+.newsletter-input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 10px 40px 10px 12px;         /* espaço à direita p/ a seta */
+  font-size: 14px;
+  color: var(--black);
+}
+
+/* 🇧🇷 Botão em forma de seta dentro do campo (absoluto à direita) */
+.newsletter-go {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--lenovo-blue);
+  font-size: 20px;                      /* tamanho da seta */
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* 🇧🇷 Foco/hover com realce de borda, como no site */
+.newsletter-field:focus-within {
+  border-color: var(--lenovo-blue);
+  box-shadow: 0 0 0 1px var(--lenovo-blue, #294e95);
+}
+.newsletter-go:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.footer-input {
+  padding: 10px 12px;
+  border: 1px solid var(--lenovo-gray);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  background: var(--white);
+  min-width: 260px;
+  
+}
+.footer-btn {
+  padding: 0 14px;
+  border: 1px solid var(--lenovo-gray);
+  background: var(--white);
+  color: var(--lenovo-gray);
+    background: var(--lenovo-red);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* 🔗 Ícones sociais */
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  
+}
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-pill img {
+  width: 34px;
+  height: 34px;
+}
+
+.social-pill:hover { transform: translateY(-1px); }
+
+/* 🌍 Rótulo do seletor de país */
+.country-select-wrap { min-width: 260px; }
+.country-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+/* 📂 Links em 5 colunas (desktop) */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  justify-content: center;
+  gap: var(--space-4);
+  margin: 0 auto var(--space-4) auto;
+  max-width: 1200px;
+  padding: 0 16px;
+}
+.footer-links h4 {
+  font-weight: bold;
+  margin-bottom: var(--space-2);
+  color: var(--black);
+  text-align: left;
+  text-transform: uppercase;
+}
+.footer-links ul {
+  list-style: none;
+  padding: 0.5rem;
+  text-align: left;
+}
+.footer-links li {
+  margin-bottom: var(--space-2);
+}
+.footer-links a {
+  color: var(--black);
+  text-decoration: none;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* 📜 Barra inferior */
+.footer-bottom {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 📱 Responsivo */
+@media (max-width: 992px) {
+  .footer__container { grid-template-columns: 1fr; justify-items: center; }
+  .footer-left, .footer-center, .footer-right { justify-self: center; width: 100%; }
+  .footer-links { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .footer-links { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .footer-links { grid-template-columns: 1fr; }
+}

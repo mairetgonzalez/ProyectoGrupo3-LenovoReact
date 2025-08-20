@@ -1,0 +1,53 @@
+:root {
+  /* 🎨 Cores oficiais da Lenovo */
+  --lenovo-red: #e1251b;          /* Vermelho principal Lenovo */
+  --lenovo-light-gray: #ededed;   /* Cinza claro para fundos */
+  --lenovo-gray: #e4e4e4;         /* Cinza médio para áreas secundárias */
+  --lenovo-purple: #7a126b;       /* Roxo para destaques específicos */
+  --lenovo-blue: #294e95;         /* Azul para links ou áreas especiais */
+  --black: #000000;               /* Preto para textos e fundos */
+  --white: #ffffff;               /* Branco para fundos e textos */
+
+  /* 🔠 Tipografia e estilos base */
+  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* Fonte padrão */
+  --radius: 12px; /* Raio de borda padrão para botões, cards, etc. */
+
+  /* 📏 Espaçamentos padrão (margens e paddings) */
+  --space-1: 4px;   /* Espaço muito pequeno */
+  --space-2: 8px;   /* Espaço pequeno */
+  --space-3: 12px;  /* Espaço médio */
+  --space-4: 16px;  /* Espaço padrão */
+  --space-5: 20px;  /* Espaço um pouco maior */
+  --space-6: 24px;  /* Espaço grande */
+   --space-7: 30px;  /* Espaço mais grande */
+}
+
+/* Define que todas as medidas de largura/altura incluem bordas e padding */
+* {
+  box-sizing: border-box;
+}
+
+/* Faz o body ocupar toda a altura da tela */
+html, body, #root {
+  height: 100%;
+}
+
+/* Estilo base do corpo da página */
+body {
+  margin: 0; /* Remove margens padrão do navegador */
+  font-family: var(--font-main); /* Define a fonte principal */
+  color: var(--black); /* Cor de texto padrão */
+  background-color: var(--white); /* Cor de fundo padrão */
+}
+
+/* Links herdarem cor do texto e sem sublinhado */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Botões usam a mesma fonte e mostram cursor de clique */
+button {
+  font-family: var(--font-main);
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="icon-footer-youtube" transform="translate(-96)">
+    <g id="icon-footer-youtube-2" data-name="icon-footer-youtube" transform="translate(96)">
+      <g id="icon-circle">
+        <circle id="icon-container" cx="15" cy="15" r="15" fill="#294e95"/>
+      </g>
+      <path id="icon-youtube" d="M17.629-4.11A2.255,2.255,0,0,0,16.043-5.7,52.687,52.687,0,0,0,9-6.082a54.739,54.739,0,0,0-7.043.371A2.3,2.3,0,0,0,.371-4.11,23.761,23.761,0,0,0,0,.219,23.674,23.674,0,0,0,.371,4.549,2.255,2.255,0,0,0,1.957,6.135,52.782,52.782,0,0,0,9,6.521a54.739,54.739,0,0,0,7.043-.371,2.255,2.255,0,0,0,1.587-1.586A23.769,23.769,0,0,0,18,.234,22.556,22.556,0,0,0,17.629-4.11ZM7.206,2.918v-5.4l4.685,2.7Zm0,0" transform="translate(6 14.781)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

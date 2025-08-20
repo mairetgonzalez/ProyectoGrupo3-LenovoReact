@@ -1,0 +1,209 @@
+/* ---------- Contenedor principal ---------- */
+.header {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ---------- Banda promocional superior ---------- */
+.header__top__promo {
+  background: #ededed;
+  padding: 1.5rem 1rem;
+}
+
+/* ---------- Fila: logo / buscador / íconos ---------- */
+.header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 1.5rem 1rem; /* top right bottom left */
+  background: #f7f7f7;
+}
+
+.header__logo {
+  height: 40px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+/* --- Centro: buscador centrado --- */
+.header__search {
+  flex: 1 1 auto;             /* ocupa el espacio central */
+  display: flex;
+  justify-content: center;    /* centra horizontalmente */
+}
+
+/* envoltorio para input + botón */
+.header__search-form,
+.header__search form {
+  position: relative;
+  width: 100%;
+  max-width: 720px;           /* ancho máximo del buscador */
+}
+
+/* caja de búsqueda */
+.header__search-input {
+  width: 100%;
+  height: 48px;               /* más alto para que se vea robusto */
+  padding: 0 48px 0 16px;     /* espacio a la derecha para la lupa */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  outline: none;
+  font-size: 16px;            /* texto más legible */
+}
+
+.header__search-input:focus {
+  border-color: #e1140a;      /* rojo Lenovo */
+  box-shadow: 0 0 0 1px #e1140a;
+}
+
+/* botón con la lupa dentro del input */
+.header__search-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 20px;           /* tamaño del icono de búsqueda */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* botón de lupa dentro del input */
+.header__search-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 28px;
+  width: 28px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #222;
+  font-size: 16px;                   /* tamaño del icono */
+}
+
+/* --- Derecha: íconos --- */
+.header__icons {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header__icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #111;
+}
+
+/* ---------- Navegación ---------- */
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 1rem;
+  background: #fff;
+}
+
+/* Listas izquierda y derecha */
+.header__nav--left,
+.header__nav--right {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+}
+
+.header__nav--left li,
+.header__nav--right li {
+  line-height: 1;
+  cursor: pointer;
+  color: #222;
+}
+
+.header__nav--left li:hover,
+.header__nav--right li:hover {
+  color: #e1140a;
+}
+
+/* ---------- Submenús ---------- */
+.has-submenu { position: relative; }
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 0.75rem 0;
+  margin: 0;
+  min-width: 200px;
+  z-index: 20;
+}
+
+.submenu li {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.submenu li:hover { background: #f5f5f5; }
+
+/* Mostrar submenú al hover */
+.has-submenu:hover > .submenu { display: block; }
+
+/* ---------- Banda inferior ---------- */
+.header__bottom {
+  background: #ededed;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .header__nav--right { gap: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .header__top {
+    gap: 12px;
+    padding: 1rem;
+  }
+
+  .header__logo { height: 32px; }
+
+  .header__search-form,
+  .header__search form {
+    max-width: 100%;
+  }
+
+  .header__nav {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .header__nav--right { display: none; } /* opcional: ocultar menú derecho en móvil */
+}
+
+@media (max-width: 480px) {
+  .header__icon { font-size: 16px; }
+  .header__search-input { height: 40px; }
+  .header__search-btn { right: 8px; }
+}

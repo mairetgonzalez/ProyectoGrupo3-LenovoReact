@@ -1,0 +1,95 @@
+/* Seção do carrossel; ocupar a largura total e altura definida */
+.hero-carousel{
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: #000;            /* antes estava aqua; deixamos neutro */
+  margin-bottom: 2.5rem;
+}
+
+/* Cada slide ocupa toda a área */
+.hero-slide{
+  position: relative;
+  width: 100%;
+  height: 520px;
+}
+
+/* Imagem preenche a área mantendo proporção */
+.hero-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.82);
+  display: block;
+}
+
+/* Conteúdo sobre a imagem */
+.hero-caption{
+  position: absolute;
+  top: 30%;
+  left: 7%;
+  color: #fff;
+  max-width: 430px;
+  z-index: 2;                  /* acima da imagem e do gradiente */
+}
+.hero-kicker{
+  display: inline-block;
+  font-weight: 600;
+  opacity: .95;
+  margin-bottom: 10px;
+}
+.hero-caption h2{
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.15;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.hero-caption button{
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 1.7rem;
+  font-size: 1.08rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,.14);
+  transition: background .19s;
+}
+.hero-caption button:hover{ background:#000; color:#fff }
+
+/* Gradiente lateral para contraste */
+.hero-gradient{
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,0));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ajustes do slick (altura 100% para a área do slide) */
+.slick-slider, .slick-list, .slick-track{ height: 100% }
+
+/* Dots (bolinhas) em branco */
+.slick-dots{ bottom: 12px }
+.slick-dots li button:before{ font-size:10px; color:#fff; opacity:.6 }
+.slick-dots li.slick-active button:before{ color:#fff; opacity:1 }
+
+/* Setas do slick (agora com CSS do slick carregado) */
+.slick-prev:before, .slick-next:before{
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 900px){
+  .hero-carousel, .hero-slide{ height: 360px }
+  .hero-gradient{ width: 60% }
+  .hero-caption{ top: 22%; left: 6%; max-width: 80% }
+}
+@media (max-width: 600px){
+  .hero-carousel, .hero-slide{ height: 300px }
+  .hero-caption{ top: 20%; left: 5% }
+}

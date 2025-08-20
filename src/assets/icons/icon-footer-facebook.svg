@@ -1,0 +1,8 @@
+<svg id="icon-footer-facebook" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="circle-container">
+    <g id="icon-circle">
+      <circle id="icon-container" cx="15" cy="15" r="15" fill="#294e95"/>
+    </g>
+  </g>
+  <path id="fb-icon" d="M10.618,10.125l.5-3.258H7.992V4.753a1.629,1.629,0,0,1,1.837-1.76H11.25V.22A17.329,17.329,0,0,0,8.728,0C6.153,0,4.471,1.56,4.471,4.385V6.867H1.609v3.258H4.471V18H7.992V10.125Z" transform="translate(8.57 6)" fill="#fff"/>
+</svg>
