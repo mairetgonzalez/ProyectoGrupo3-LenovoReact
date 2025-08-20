@@ -27,4 +27,5 @@ npm install react-select
 ##para navegacion entre paginas 
 ##npm install react-router-dom
 
-
+##para axios 
+##npm install axios react-router-dom

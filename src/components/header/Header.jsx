@@ -1,4 +1,6 @@
+// src/components/header/Header.jsx
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { FaUser, FaShoppingCart, FaHeart, FaSearch } from 'react-icons/fa';
 import './Header.css';
 import logo from '../../assets/lenovo-logo.png';
@@ -11,9 +13,11 @@ const Header = () => {
 
       {/* Logo, buscador e íconos */}
       <div className="header__top">
-        <img src={logo} alt="Lenovo" className="header__logo" />
+        <NavLink to="/" aria-label="Ir al inicio">
+          <img src={logo} alt="Lenovo" className="header__logo" />
+        </NavLink>
 
-          {/* Centro: buscador */}
+        {/* Centro: buscador */}
         <div className="header__search">
           <form className="header__search-form" onSubmit={(e) => e.preventDefault()}>
             <input
@@ -21,13 +25,13 @@ const Header = () => {
               placeholder="Procurar produtos"
               className="header__search-input"
             />
-            <button className="header__search-btn" aria-label="Buscar">
+            <button className="header__search-btn" aria-label="Buscar" type="submit">
               <FaSearch />
             </button>
           </form>
         </div>
 
-        {/* DERECHA: iconos */}
+        {/* Derecha: íconos */}
         <div className="header__icons">
           <FaUser className="header__icon" />
           <FaHeart className="header__icon" />
@@ -38,16 +42,27 @@ const Header = () => {
       {/* Navegación */}
       <nav className="header__nav">
         <ul className="header__nav--left">
-          <li className="has-submenu">Home</li>
-          <li className="has-submenu">Loja</li>
-          <li className="has-submenu">Promoções</li>
-          <li className="has-submenu">Sobre Nós</li>
-          <li className="has-submenu">Contatos</li>
+          <li className="has-submenu">
+            <NavLink to="/" end>Home</NavLink>
+          </li>
+          <li className="has-submenu">
+            <NavLink to="/produtos">Loja</NavLink>
+          </li>
+          <li className="has-submenu">
+            <NavLink to="/promocoes">Promoções</NavLink>
+          </li>
+          <li className="has-submenu">
+            <NavLink to="/sobre">Sobre Nós</NavLink>
+          </li>
+          <li className="has-submenu">
+            <NavLink to="/contatos">Contatos</NavLink>
+          </li>
         </ul>
+
         <ul className="header__nav--right">
-          <li>Empresa</li>
-          <li>Educação</li>
-          <li>Gaming</li>
+          <li><NavLink to="/empresa">Empresa</NavLink></li>
+          <li><NavLink to="/educacao">Educação</NavLink></li>
+          <li><NavLink to="/gaming">Gaming</NavLink></li>
         </ul>
       </nav>
 
