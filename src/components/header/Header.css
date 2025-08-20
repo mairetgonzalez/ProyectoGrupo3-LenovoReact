@@ -4,6 +4,9 @@
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  
 }
 
 /* ---------- Banda promocional superior ---------- */
@@ -116,6 +119,7 @@
   gap: 16px;
   padding: 1rem;
   background: #fff;
+  
 }
 
 /* Listas izquierda y derecha */
@@ -127,6 +131,7 @@
   margin: 0;
   padding: 0;
   gap: 1.5rem;
+  
 }
 
 .header__nav--left li,
@@ -134,6 +139,7 @@
   line-height: 1;
   cursor: pointer;
   color: #222;
+  
 }
 
 .header__nav--left li:hover,
@@ -141,32 +147,10 @@
   color: #e1140a;
 }
 
-/* ---------- Submenús ---------- */
-.has-submenu { position: relative; }
-
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  list-style: none;
-  padding: 0.75rem 0;
-  margin: 0;
-  min-width: 200px;
-  z-index: 20;
+.header__nav--left .active {
+  font-weight: 800;   /* más negrita */
+  color: #000;        /* opcional: cambia color */
 }
-
-.submenu li {
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-}
-
-.submenu li:hover { background: #f5f5f5; }
-
-/* Mostrar submenú al hover */
-.has-submenu:hover > .submenu { display: block; }
 
 /* ---------- Banda inferior ---------- */
 .header__bottom {
@@ -174,6 +158,7 @@
   padding: 0.5rem;
   text-align: center;
   font-size: 14px;
+
 }
 
 /* ---------- Responsive ---------- */

@@ -39,9 +39,8 @@ const Header = () => {
       <nav className="header__nav">
         <ul className="header__nav--left">
           <li className="has-submenu">Home</li>
-          <li className="has-submenu">Promoções</li>
           <li className="has-submenu">Loja</li>
-          <li>Suporte</li>
+          <li className="has-submenu">Promoções</li>
           <li className="has-submenu">Sobre Nós</li>
           <li className="has-submenu">Contatos</li>
         </ul>
