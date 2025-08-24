@@ -86,7 +86,7 @@ const integrantesData = [
         pais: "Venezuela",
         mora: "São Paulo",
         profissao: "Ingenieria Eletrónica",
-        interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
+        interesse: "Tenho interesse em programação porque quero mudar de emprego e vejo que é algo que tem mais remuneração",
         email: "desireemarcanob@gmail.com",
         telefone: "11949468511"
     }
