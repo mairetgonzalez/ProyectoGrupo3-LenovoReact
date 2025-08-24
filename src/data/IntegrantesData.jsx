@@ -10,7 +10,7 @@ const integrantesData = [
     {
         id: 1,
         img: Gabriel, //tamanho ideal da imagem 1064 x 683
-        alt: "Foto de Gabriel Abreu",
+        alt: "Foto do Gabriel Abreu",
         nome: "Gabriel Abreu",
         idade: "35",
         pais: "Venezuela",
@@ -25,7 +25,7 @@ const integrantesData = [
         id: 2,
         img: GabrielV,
         alt: "Gabriel Vera",
-        nome: "Gabriel Vera",
+        nome: "Foto de Gabriel Vera",
         idade: "31",
         pais: "Venezuela",
         mora: "Brasilia - Distrito Federal",
@@ -38,12 +38,12 @@ const integrantesData = [
      {
         id: 3,
         img: Solangelis,
-        alt: "Solangelis",
+        alt: "Foto da Solangelis",
         nome: "Solangelis",
         idade: "35",
         pais: "Venezuela",
         mora: "Curitiba - Paraná",
-        profissao: "Ingenieria Eletrónica",
+        profissao: "Sou nformática de profesión",
         interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
         email: "gabreucast@gmail.com",
         telefone: "41997711784"
@@ -52,43 +52,43 @@ const integrantesData = [
      {
         id: 4,
         img: Ezequiel,
-        alt: "Ezequiel",
-        nome: "Ezequiel",
-        idade: "35",
+        alt: "Foto do Ezequiel",
+        nome: "Ezequiel Montilla",
+        idade: "40",
         pais: "Venezuela",
-        mora: "Curitiba - Paraná",
-        profissao: "Ingenieria Eletrónica",
+        mora: "Rio de Janeiro",
+        profissao: "Bacharel em Tecnologia de Alimentos",
         interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
-        email: "gabreucast@gmail.com",
-        telefone: "41997711784"
+        email: "ezequielmont@gmail.com",
+        telefone: "21974840042"
     },
 
      {
         id: 5,
         img: Mairet,
-        alt: "Mairet",
-        nome: "Mairet",
+        alt: "Foto da Mairet González",
+        nome: "Mairet González ",
         idade: "35",
         pais: "Venezuela",
-        mora: "Curitiba - Paraná",
+        mora: "Ji-Paraná - Rondônia",
         profissao: "Ingenieria Eletrónica",
         interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
-        email: "gabreucast@gmail.com",
-        telefone: "41997711784"
+        email: "marketingconmai@gmail.com",
+        telefone: "69981210268"
     },
 
      {
         id: 6,
         img: Desiree,
-        alt: "Desiree",
-        nome: "Desiree",
-        idade: "35",
+        alt: "Foto da Desiree Marcano",
+        nome: "Desiree Marcano",
+        idade: "44",
         pais: "Venezuela",
-        mora: "Curitiba - Paraná",
+        mora: "São Paulo",
         profissao: "Ingenieria Eletrónica",
-        interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
-        email: "gabreucast@gmail.com",
-        telefone: "41997711784"
+        interesse: "Tenho interesse em programação porque quero mudar de emprego e vejo que é algo que tem mais remuneração",
+        email: "desireemarcanob@gmail.com",
+        telefone: "11949468511"
     }
 ];
 
