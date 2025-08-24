@@ -1,7 +1,7 @@
 .SobreNos {
     display: grid;
     grid-template-columns: repeat(3, 400px);
-    gap: 100px;
+    gap: 40px;
     justify-content: center;
     font-family: Lato, Helvetica, Arial, sans-serif;
     padding: 16px;
@@ -83,7 +83,6 @@ p {
 .interesseIntegrante {
     display: flex;
     align-items: flex-start;
-    background-color: #f5f5f5;
     border-radius: 8px;
     line-height: 1.4;
 }
