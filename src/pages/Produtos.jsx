@@ -3,11 +3,13 @@
 
 import { useEffect, useState } from "react";
 import { listProdutos } from "../services/api";
+import { useCart } from "../store/CartContext";
 
 export default function Produtos(){
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+ const { addToCart, isInCart, getItemQuantity } = useCart();
 
   useEffect(() => {
     setLoading(true);
@@ -59,17 +61,24 @@ export default function Produtos(){
             <strong style={{color:"#111"}}>
               R${Number(item.price||0).toLocaleString("pt-BR")}
             </strong>
-            <button style={{
-              marginTop:"auto",
-              background:"#e1140a",
-              color:"#fff",
-              border:0,
-              borderRadius:8,
-              padding:"10px 12px",
-              cursor:"pointer",
-              fontWeight:600
-            }}>
-              Adicionar ao carrinho
+            <button 
+              onClick={() => addToCart(item.raw)}
+              style={{
+                marginTop:"auto",
+                background: isInCart(item.id) ? "#28a745" : "#e1140a",
+                color:"#fff",
+                border:0,
+                borderRadius:8,
+                padding:"10px 12px",
+                cursor:"pointer",
+                fontWeight:600,
+                transition: "background-color 0.3s ease"
+              }}
+            >
+              {isInCart(item.id) 
+                ? `En carrito (${getItemQuantity(item.id)})` 
+                : "Adicionar ao carrinho"
+              }
             </button>
           </article>
         ))}

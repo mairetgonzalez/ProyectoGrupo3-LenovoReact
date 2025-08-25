@@ -4,8 +4,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './components/header/Header';
 import HeroCarousel from './components/header/HeroCarousel';
 import Produtos from './pages/Produtos';
+import Cart from './pages/Cart';
 import Footer from './components/footer/Footer';
 import SobreNos from './pages/SobreNos';
+import CartProvider from './store/CartContext';
 
 
 // ✅ Home mínimo (si aún no tienes un Home.jsx)
@@ -21,7 +23,7 @@ function Home() {
 
 export default function App(){
   return (
-    <>
+    <CartProvider>
       <Header />
       <Routes>
         {/* Página principal */}
@@ -30,15 +32,17 @@ export default function App(){
         {/* Lista de productos (ruta del front) */}
         <Route path="/produtos" element={<Produtos />} />
 
+        {/* Página del carrito */}
+        <Route path="/cart" element={<Cart />} />
+
         {/* Lista de integrantes */}
         <Route path="/sobre" element={<SobreNos />} />
-
 
         {/* Redirección para rutas desconocidas */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
-    </>
+    </CartProvider>
   );
 }
 
