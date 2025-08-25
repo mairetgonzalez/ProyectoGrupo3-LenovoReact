@@ -11,8 +11,10 @@
 
 /* ---------- Banda promocional superior ---------- */
 .header__top__promo {
-  background: #ededed;
-  padding: 1.5rem 1rem;
+      height: 38px;
+    padding: 6px 6px 0 16px;
+    background-color: #ededed;
+    align-items: flex-start;
 }
 
 /* ---------- Fila: logo / buscador / íconos ---------- */
@@ -22,7 +24,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 1.5rem 1rem; /* top right bottom left */
-  background: #f7f7f7;
+  background: #fff;
 }
 
 .header__logo {
@@ -51,7 +53,7 @@
   width: 100%;
   height: 48px;               /* más alto para que se vea robusto */
   padding: 0 48px 0 16px;     /* espacio a la derecha para la lupa */
-  border: 1px solid #ccc;
+  border: 2px solid #333;
   border-radius: 8px;
   background: #fff;
   outline: none;
@@ -102,7 +104,7 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem;
 }
 
 .header__icon {
@@ -191,4 +193,212 @@
   .header__icon { font-size: 16px; }
   .header__search-input { height: 40px; }
   .header__search-btn { right: 8px; }
+}
+
+/* ---------- Cart Tooltip Styles ---------- */
+.header__cart-container {
+  position: relative;
+}
+
+.header__cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header__cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e1140a;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.header__cart-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 8px;
+}
+
+.cart-tooltip__header {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-tooltip__header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.cart-tooltip__items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cart-tooltip__item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.cart-tooltip__item:last-child {
+  border-bottom: none;
+}
+
+.cart-tooltip__item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cart-tooltip__item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.cart-tooltip__item-info {
+  flex: 1;
+}
+
+.cart-tooltip__item-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.3;
+}
+
+.cart-tooltip__item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-tooltip__item-controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 6px;
+  border: 2px solid #A4A2A2;
+  border-radius: 15px;
+  background: white;
+}
+
+.cart-tooltip__control-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.cart-tooltip__remove-btn {
+  background: white;
+  color: black;
+  border-right: 1px solid #333;
+}
+
+.cart-tooltip__remove-btn:hover {
+  background: #f5f5f5;
+}
+
+.cart-tooltip__add-btn {
+ background: #fff;
+  color: #4E444E;
+}
+
+.cart-tooltip__add-btn:hover {
+  background: #fff;
+}
+
+.cart-tooltip__quantity {
+  background: white;
+  border: none;
+  border-right: 1px solid #333;
+  border-radius: 0;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: center;
+}
+
+.cart-tooltip__item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.cart-tooltip__footer {
+  padding: 16px;
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+}
+
+.cart-tooltip__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.cart-tooltip__view-cart-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #e1140a;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.cart-tooltip__view-cart-btn:hover {
+  background: #c10e08;
+}
+
+/* User section styles */
+.header__user-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.header__user-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
 }
