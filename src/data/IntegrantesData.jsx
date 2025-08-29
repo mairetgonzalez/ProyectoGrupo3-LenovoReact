@@ -15,7 +15,7 @@ const integrantesData = [
         idade: "35",
         pais: "Venezuela",
         mora: "Curitiba - Paraná",
-        profissao: "Suporte técnico",
+        profissao: "Engenheiro Eletrónico.",
         interesse: "A programação faz parte do nosso dia a dia e por isso é importante estar nesse mundo da programação",
         email: "gabreucast@gmail.com",
         telefone: "41997711784"
@@ -24,8 +24,8 @@ const integrantesData = [
      {
         id: 2,
         img: GabrielV,
-        alt: "Gabriel Vera",
-        nome: "Foto de Gabriel Vera",
+        alt: "Foto de Gabriel Vera",
+        nome: "Gabriel Vera",
         idade: "31",
         pais: "Venezuela",
         mora: "Brasilia - Distrito Federal",
@@ -38,15 +38,15 @@ const integrantesData = [
      {
         id: 3,
         img: Solangelis,
-        alt: "Foto da Solangelis",
-        nome: "Solangelis",
-        idade: "35",
+        alt: "Foto da Solangelis Hernandez",
+        nome: "Solangelis Hernandez",
+        idade: "32",
         pais: "Venezuela",
-        mora: "Curitiba - Paraná",
-        profissao: "Sou nformática de profesión",
-        interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
-        email: "gabreucast@gmail.com",
-        telefone: "41997711784"
+        mora: "Bragança - São Paulo",
+        profissao: "Engenharia de Software",
+        interesse: "A programação me permite resolver problemas reais, criar produtos úteis e aprender continuamente.",
+        email: "solangelis110493@gmail.com",
+        telefone: "11933191212"
     },
 
      {
@@ -71,7 +71,7 @@ const integrantesData = [
         idade: "35",
         pais: "Venezuela",
         mora: "Ji-Paraná - Rondônia",
-        profissao: "Ingenieria Eletrónica",
+        profissao: "Informática de profesión ",
         interesse: "Sempre tem mudaças e quero ser parte do mundo da tecnologia",
         email: "marketingconmai@gmail.com",
         telefone: "69981210268"
@@ -85,7 +85,7 @@ const integrantesData = [
         idade: "44",
         pais: "Venezuela",
         mora: "São Paulo",
-        profissao: "Ingenieria Eletrónica",
+        profissao: "Ingenieria Civil",
         interesse: "Tenho interesse em programação porque quero mudar de emprego e vejo que é algo que tem mais remuneração",
         email: "desireemarcanob@gmail.com",
         telefone: "11949468511"

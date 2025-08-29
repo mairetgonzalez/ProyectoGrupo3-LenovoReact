@@ -8,7 +8,7 @@
 }
 
 .retangulo {
-    width: 200px;
+    width: 250px;
     height: 40px;
     background-color: #E1251B;
     margin: 0 auto;
@@ -54,7 +54,7 @@
 .nomeIntegrante {
     color: rgb(41, 78, 149);
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     margin: 5px 5px 15px 5px;
 }
 
@@ -93,18 +93,24 @@ p {
 
 .rowIdadePais,
 .moraIntegrante,
-.profissaoIntegrante,
 .interesseIntegrante,
 .emailIntegrante,
 .telefoneIntegrante {
     margin: 3px 0;
-    font-size: 17px; /*Entre 16px e 18px*/
+    font-size: 16px; /*Entre 16px e 18px*/
 }
 
-.contatoIntegrante {
-    margin-left: 16px;
+.profissaoIntegrante {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
     margin-bottom: 5px;
+    margin-left: 24px; /* solo el texto se desplaza, el ícono queda normal */
+}
+
+.profissaoIntegrante .icon {
+    margin-left: -7px; /* quita el extra que tenías */
+    margin-right: 8px; /* mantiene espacio entre icono y texto */
 }
 
 /* Fuente de letra:
