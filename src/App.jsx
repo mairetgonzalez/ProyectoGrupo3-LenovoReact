@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from './components/header/Header';
@@ -7,6 +6,7 @@ import Produtos from './pages/Produtos';
 import Cart from './pages/Cart';
 import Footer from './components/footer/Footer';
 import SobreNos from './pages/SobreNos';
+import ProductDetail from './pages/ProductDetail';
 import CartProvider from './store/CartContext';
 
 
@@ -31,6 +31,9 @@ export default function App(){
 
         {/* Lista de productos (ruta del front) */}
         <Route path="/produtos" element={<Produtos />} />
+        
+        {/* Detalle de producto */}
+        <Route path="/produto/:id" element={<ProductDetail />} />
 
         {/* Página del carrito */}
         <Route path="/cart" element={<Cart />} />

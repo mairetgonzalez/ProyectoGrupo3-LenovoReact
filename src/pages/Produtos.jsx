@@ -1,17 +1,16 @@
-// src/pages/Produtos.jsx
-// 🇧🇷 Página que lista produtos da API e renderiza cards simples
-
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { listProdutos } from "../services/api";
 import { useCart } from "../store/CartContext";
 
 import "../styles/produtos.css";
 
 export default function Produtos(){
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
- const { addToCart, isInCart, getItemQuantity } = useCart();
+  const { addToCart, isInCart, getItemQuantity } = useCart();
 
   useEffect(() => {
     setLoading(true);
@@ -53,13 +52,33 @@ export default function Produtos(){
             flexDirection:"column",
             gap:8
           }}>
-            <div style={{width:"100%", aspectRatio:"4/3", overflow:"hidden", borderRadius:10, background:"#f7f7f7"}}>
+            <div 
+              onClick={() => navigate(`/produto/${item.id}`)}
+              style={{
+                width:"100%", 
+                aspectRatio:"4/3", 
+                overflow:"hidden", 
+                borderRadius:10, 
+                background:"#f7f7f7",
+                cursor: "pointer"
+              }}
+            >
               {item.image
                 ? <img src={item.image} alt={item.name} style={{width:"100%", height:"100%", objectFit:"cover"}}/>
                 : <div style={{display:"grid", placeItems:"center", height:"100%", color:"#999"}}>Sem imagem</div>
               }
             </div>
-            <h3 style={{fontSize:16, margin:"8px 0 4px"}}>{item.name}</h3>
+            <h3 
+              onClick={() => navigate(`/produto/${item.id}`)} 
+              style={{
+                fontSize:16, 
+                margin:"8px 0 4px", 
+                cursor: "pointer",
+                color: "#333333" 
+              }}
+            >
+              {item.name}
+            </h3>
             <strong style={{color:"#111"}}>
               R${Number(item.price||0).toLocaleString("pt-BR")}
             </strong>
