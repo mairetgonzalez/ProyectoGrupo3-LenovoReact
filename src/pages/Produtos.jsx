@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { listProdutos } from "../services/api";
 import { useCart } from "../store/CartContext";
 
+import "../styles/produtos.css";
+
 export default function Produtos(){
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
