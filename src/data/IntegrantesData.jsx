@@ -9,7 +9,7 @@ import Solangelis from "../assets/fotosIntegrantes/Solangelis.png";
 const integrantesData = [
     {
         id: 1,
-        img: Gabriel, //tamanho ideal da imagem 1064 x 683
+        img: Gabriel, //tamanho ideal da imagem 238 × 250 px
         alt: "Foto do Gabriel Abreu",
         nome: "Gabriel Abreu",
         idade: "35",
