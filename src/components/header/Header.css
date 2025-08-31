@@ -281,6 +281,72 @@
 
 }
 
+/* src/components/SearchBar.css */
+
+/* Contenedor del form */
+.searchbar {
+  display: flex;
+  align-items: center;
+  max-width: 500px;     /* ancho máximo */
+  width: 100%;
+  margin: 0 auto;       /* centra si es bloque */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  transition: box-shadow .2s ease;
+}
+
+.searchbar:focus-within {
+  box-shadow: 0 0 0 2px #2563eb33; /* azul suave cuando se activa */
+  border-color: #2563eb;
+}
+
+/* Input */
+.searchbar__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.searchbar__input::placeholder {
+  color: #888;
+}
+
+/* Botón */
+.searchbar__button {
+  background: transparent;
+  border: none;
+  padding: 0 14px;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.searchbar__button:hover {
+  color: #2563eb;      /* azul Lenovo */
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .searchbar {
+    max-width: 100%;
+  }
+  .searchbar__input {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
+
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .header__nav--right { gap: 1rem; }

@@ -1,29 +1,84 @@
+// src/componentes/header/HeroCarousel.jsx
 import React from "react";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
-// ► IMPORTANTE: estilos do slick (sem isso, as setas viram texto “Previous/Next”)
+// Estilos base de slick (necesarios)
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import "./HeroCarousel.css";
 
-import banner1 from "../../assets/banner/banner1.jpg";
-import banner2 from "../../assets/banner/banner6.jpg";
-import banner3 from "../../assets/banner/banner7.jpg";
+// Banners por defecto (Home)
+import banner1 from "../../assets/banner/banner3.jpg";
+import banner2 from "../../assets/banner/banner1.jpg";
+import banner3 from "../../assets/banner/banner9.jpg";
 
+/** Flechas personalizadas */
+function PrevArrow({ onClick }) {
+  return (
+    <button
+      type="button"
+      aria-label="Anterior"
+      className="hero-arrow hero-arrow--prev"
+      onClick={onClick}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+        <path d="M15 18l-6-6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
+  );
+}
+function NextArrow({ onClick }) {
+  return (
+    <button
+      type="button"
+      aria-label="Siguiente"
+      className="hero-arrow hero-arrow--next"
+      onClick={onClick}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+        <path d="M9 6l6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </button>
+  );
+}
 
-
-
-const slides = [
-  { imagen: banner1, titulo: "Somos Lenovo", desc: "Nossa História", boton: "Saiba Mais" },
-  { imagen: banner2, titulo: "Outlet Lenovo", desc: "Até 40% OFF!", boton: "Comprar Agora" },
-  { imagen: banner3, titulo: "Promoções Exclusivas", desc: "Ofertas imperdíveis", boton: "Ver Mais" },
+/** Slides por defecto (se usan en Home si NO pasas prop `slides`) */
+const defaultSlides = [
+  {
+    imagen: banner1,
+    titulo: "ANIVERSÁRIO LENOVO",
+    desc1: "VOCÊ É NOSSO CONVIDADO ESPECIAL!",
+    desc2: "Aproveite até 45% OFF em ofertas imperdíveis em todo site!",
+    boton: "Compre Agora",
+    link: "/produtos",
+  },
+  {
+    imagen: banner2,
+    titulo: "Ofertas Gamer",
+    desc1: "ANIVERSÁRIO LENOVO • DESCONTOS IMPERDÍVEIS",
+    desc2: "Aproveite até R$ 3.000 OFF na Linha Gamer.",
+    boton: "Comprar Agora",
+    link: "/produto/14",
+  },
+  {
+    imagen: banner3,
+    titulo: "Lenovo Pro para Negocios",
+    desc1: "SEJA LENOVO PRO, LIGUE 0800-539-6361...",
+    desc2: "Sob medida para as necessidades do seu negócio.",
+    boton: "Saiba Mais",
+    link: "/contatos",
+  },
 ];
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ slides: slidesProp }) {
+  // Si te pasan slides, úsalo; si no, usa defaultSlides
+  const slides = Array.isArray(slidesProp) && slidesProp.length ? slidesProp : defaultSlides;
+
   const settings = {
-    dots: true,            // bolinhas de navegação
-    arrows: true,          // setas (vão aparecer como ícones com o CSS do slick)
+    dots: true,
+    arrows: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5500,
@@ -31,7 +86,9 @@ export default function HeroCarousel() {
     slidesToScroll: 1,
     pauseOnHover: true,
     adaptiveHeight: false,
-    responsive: [{ breakpoint: 900, settings: { arrows: false } }], // opcional: sem setas no mobile
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [{ breakpoint: 640, settings: { arrows: false } }],
   };
 
   return (
@@ -40,12 +97,26 @@ export default function HeroCarousel() {
         {slides.map((slide, idx) => (
           <div className="hero-slide" key={idx}>
             <img src={slide.imagen} alt={slide.titulo} className="hero-img" />
+
             <div className="hero-caption">
-              <span className="hero-kicker">{slide.desc}</span>
-              <h2>{slide.titulo}</h2>
-              <button type="button">{slide.boton}</button>
+              <div className="hero-caption__inner">
+                <h2 className="hero-title">{slide.titulo}</h2>
+                <p className="hero-desc1">{slide.desc1}</p>
+                <p className="hero-desc2">{slide.desc2}</p>
+                <div className="hero-actions">
+                  {slide.link ? (
+                    <Link to={slide.link} className="hero-btn hero-btn--light">
+                      {slide.boton}
+                    </Link>
+                  ) : (
+                    <button type="button" className="hero-btn hero-btn--light">
+                      {slide.boton}
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
-            {/* gradiente para melhorar contraste do texto */}
+
             <div className="hero-gradient" aria-hidden="true" />
           </div>
         ))}

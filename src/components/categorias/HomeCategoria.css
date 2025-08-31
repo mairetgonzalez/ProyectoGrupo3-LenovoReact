@@ -1,0 +1,86 @@
+/* CONTENEDOR UNICO: centra el bloque, pero alinea contenido a la izquierda */
+.lenovo-cats{
+  max-width: 1550px;       /* ancho del “container” */
+  margin: 1rem auto 2rem;  /* centrado del container */
+  padding: 0 24px;      /* sangría izquierda/derecha coherente */
+}
+
+/* TITULO alineado con la primera burbuja */
+.lenovo-cats__title{
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 500;
+  margin: 0 0 20px;
+  color: var(--lenovo-black);
+  text-align: left;   /* <- nada de centrar */
+  padding-left: 0;    /* <- sin sangrías extras */
+}
+
+/* LISTA: que NO centre; que arranque a la izquierda bajo el título */
+.lenovo-cats__list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;  /* <- clave: arranca a la izquierda */
+  gap: 48px;                    /* separación entre tarjetas */
+  padding: 0;                   /* coincide con el título */
+  margin: 0;
+  list-style: none;
+}
+
+/* TARJETA con ancho fijo para que texto e icono queden alineados */
+.lenovo-cats__link{
+  width: 120px;                 /* todas iguales -> alineación visual */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease;
+}
+
+/* CIRCULO E ICONO (tus valores actuales) */
+.lenovo-cats__circle{
+  width: 100px; height: 100px; border-radius: 50%;
+  background: var(--lenovo-light-gray);
+  display: grid; place-items: center;
+  transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.lenovo-cats__icon{
+  width: 48px; height: 48px; stroke-width: 1.4; color: var(--lenovo-black);
+  transition: color .3s ease;
+}
+
+/* HOVER bonito */
+.lenovo-cats__link:hover{ transform: translateY(-4px); }
+.lenovo-cats__link:hover .lenovo-cats__circle{
+  background: var(--lenovo-gray);
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  transform: scale(1.05);
+}
+.lenovo-cats__link:hover .lenovo-cats__icon{ color: var(--lenovo-accent); }
+
+/* TEXTO */
+.lenovo-cats__label{ font-size: 1rem; font-weight: 600; text-align:center; line-height:1.2; color:var(--lenovo-black); }
+.lenovo-cats__line{ display:block; }
+
+/* ACTIVO lila */
+.lenovo-cats__link.is-active .lenovo-cats__circle{
+  background: var(--lenovo-active);
+  box-shadow: inset 0 0 0 2px var(--lenovo-active-border);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .lenovo-cats__list{ gap: 32px; }
+  .lenovo-cats__link{ width: 110px; }
+  .lenovo-cats__circle{ width: 80px; height: 80px; }
+  .lenovo-cats__icon{ width: 36px; height: 36px; }
+  .lenovo-cats__label{ font-size: .9rem; }
+}
+@media (max-width: 640px){
+  .lenovo-cats__list{ gap: 20px; }
+  .lenovo-cats__link{ width: 96px; }
+  .lenovo-cats__circle{ width: 68px; height: 68px; }
+  .lenovo-cats__icon{ width: 28px; height: 28px; }
+  .lenovo-cats__label{ font-size: .85rem; }
+}
