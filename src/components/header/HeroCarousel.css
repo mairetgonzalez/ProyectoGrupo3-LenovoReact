@@ -1,38 +1,35 @@
-/* Seção do carrossel; ocupar a largura total e altura definida */
-.hero-carousel{
+/* Marco general con márgenes laterales */
+.hero-carousel {
   position: relative;
-  width: 100%;
-  height: 520px;
   overflow: hidden;
-  background: #000;            /* antes estava aqua; deixamos neutro */
-  margin-bottom: 2.5rem;
+  padding: 0 24px;
 }
 
-/* Cada slide ocupa toda a área */
-.hero-slide{
+/* Cada slide con esquinas redondeadas si quieres */
+.hero-slide {
   position: relative;
-  width: 100%;
-  height: 520px;
+  overflow: hidden;
 }
 
-/* Imagem preenche a área mantendo proporção */
-.hero-img{
+.hero-img {
   width: 100%;
-  height: 100%;
+  height: clamp(300px, 50vw, 560px);
   object-fit: cover;
-  filter: brightness(.82);
   display: block;
+  position: relative;
+  z-index: 0; /* fondo */
 }
 
-/* Conteúdo sobre a imagem */
-.hero-caption{
+/* Gradiente lateral para contraste (izquierda → transparente) */
+.hero-gradient{
   position: absolute;
-  top: 30%;
-  left: 7%;
-  color: #fff;
-  max-width: 430px;
-  z-index: 2;                  /* acima da imagem e do gradiente */
+  left: 0; top: 0; bottom: 0;
+  width: clamp(700px, 30vw, 480px);
+  background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,0));
+  pointer-events: none;
+  z-index: 1;   /* detrás del caption */
 }
+
 .hero-kicker{
   display: inline-block;
   font-weight: 600;
@@ -72,37 +69,125 @@
   transition: all 0.1s ease;
 }
 
-/* Gradiente lateral para contraste */
-.hero-gradient{
+/* ------- CAPTION IZQUIERDA CON ESPACIO ------- */
+.hero-caption {
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 45%;
-  background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,0));
-  z-index: 1;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: clamp(24px, 6vw, 80px);
+  padding-right: clamp(16px, 4vw, 40px);
   pointer-events: none;
+  z-index: 2;  /* sobre el gradiente */
 }
 
-/* Ajustes do slick (altura 100% para a área do slide) */
-.slick-slider, .slick-list, .slick-track{ height: 100% }
+.hero-caption__inner {
+  width: min(600px, 92%);
+  color: #fff;
+  text-align: left;
+  margin-left: 4rem;
+  pointer-events: auto; /* habilita clicks en botones */
+}
 
-/* Dots (bolinhas) em branco */
-.slick-dots{ bottom: 12px }
-.slick-dots li button:before{ font-size:10px; color:#fff; opacity:.6 }
-.slick-dots li.slick-active button:before{ color:#fff; opacity:1 }
+/* Títulos/descr (dejamos tus tamaños) */
+.hero-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+}
+.hero-desc1 {
+  font-size: clamp(0.9rem, 1.6vw, 1rem);
+  font-weight: 500;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  opacity: .95;
+}
+.hero-desc2 {
+  font-size: clamp(1rem, 2.4vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 18px;
+  opacity: .95;
+}
 
-/* Setas do slick (agora com CSS do slick carregado) */
-.slick-prev:before, .slick-next:before{
-  font-size: 24px;
+/* Botones */
+.hero-actions { display: flex; gap: 16px; }
+.hero-btn {
+  border: 0;
+  border-radius: 5px;
+  padding: 12px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+
+/* Tu variante clara por defecto (texto oscuro) */
+.hero-btn--light {
+  background: #fff;
+  color: #111;
+}
+
+/* ✅ HOVER que pediste: negro con letras blancas */
+.hero-btn:hover,
+.hero-btn--light:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.18);
+}
+
+/* ------- FLECHAS EN CÍRCULO OSCURO (solo las nuestras) ------- */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 5;
+  backdrop-filter: saturate(140%) blur(2px);
+  transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+}
+.hero-arrow:hover {
+  transform: translateY(-50%) scale(1.05);
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 10px 20px rgba(0,0,0,.25);
+}
+.hero-arrow--prev { left: 36px; }
+.hero-arrow--next { right: 36px; }
+
+/* Por si slick intenta pintar sus propias flechas con pseudo-elementos */
+.slick-prev:before,
+.slick-next:before { display: none !important; }
+
+/* Dots centrados abajo */
+.slick-dots { bottom: 12px !important; }
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #fff;
+  opacity: .75;
+}
+.slick-dots li.slick-active button:before {
+  opacity: 1;
   color: #fff;
 }
 
-/* Responsivo */
-@media (max-width: 900px){
-  .hero-carousel, .hero-slide{ height: 360px }
-  .hero-gradient{ width: 60% }
-  .hero-caption{ top: 22%; left: 6%; max-width: 80% }
-}
-@media (max-width: 600px){
-  .hero-carousel, .hero-slide{ height: 300px }
-  .hero-caption{ top: 20%; left: 5% }
+/* Mobile */
+@media (max-width: 640px) {
+  .hero-caption {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .hero-arrow { display: none; }
 }

@@ -1,0 +1,134 @@
+/* Contenedor sección */
+.promos{
+  padding: 40px 0;
+}
+.promos__header{
+  max-width:1700px;
+  margin:0 auto 16px;
+  padding:0 24px;
+}
+.promos__header h2{
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+/* Grid 3 x 2 como la referencia */
+.promos__grid{
+  max-width:1700px;
+  margin:0 auto;
+  padding:0 24px 8px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Card */
+.promo{
+  background:#fff;
+  border:1px solid #e9eaec;
+  border-radius:14px;
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.promo:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.08);
+}
+
+/* Encabezado de texto (fila superior) */
+.promo__head{
+  display:none;
+  padding:14px 16px 10px;
+}
+.promo__head.is-visible{ display:block; }
+
+/* Imagen */
+.promo__img{
+  width:100%;
+  height: 220px;
+  background:#eef0f2;
+}
+.promo__img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Pie con texto + botón (fila inferior) */
+.promo__foot{
+  display:none;
+  padding:14px 16px 16px;
+}
+.promo__foot.is-visible{ display:block; }
+
+.promo__title{
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  font-weight:600;
+  margin: 0 0 6px;
+}
+.promo__text{
+  font-size:.95rem;
+  color:#333;
+  margin:0 0 12px;
+}
+.promo__btn{
+  display:inline-block;
+  padding:10px 14px;
+  background:#111;
+  color:#fff;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  transition:background .2s ease;
+}
+.promo__btn:hover{ background:#333; }
+
+/* Responsive: 2 por fila / 1 por fila */
+@media (max-width: 1024px){
+  .promos__grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .promos__grid{ grid-template-columns: 1fr; }
+  .promo__head, .promo__foot{ display:block; } /* en mobile, ambos visibles */
+  .promo__img{ height: 200px; }
+}
+
+/* La card debe permitir overlay absoluto */
+.promo {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cursor mano cuando toda la card es clicable */
+.promo.is-clickable { cursor: pointer; }
+
+/* Overlay que hace clicable toda la tarjeta (solo top 3) */
+.promo__stretched {
+  position: absolute;
+  inset: 0;
+  z-index: 5;              /* por encima del contenido */
+}
+
+/* Botón */
+.promo__btn {
+  position: relative;
+  z-index: 6;
+}
+
+/* Evita poner z-index altos en head/foot/img que bloqueen el overlay */
+.promo__head,
+.promo__foot,
+.promo__img {
+  position: relative;   /* sin z-index */
+}
+
+/* Efecto hover/focus accesible */
+.promo:hover,
+.promo:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .2s ease;
+}

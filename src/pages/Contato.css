@@ -1,0 +1,78 @@
+.contato {
+  padding: 40px 20px;
+}
+
+.contato__title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.contato__subtitle {
+  text-align: center;
+  margin-bottom: 32px;
+  color: #666;
+}
+
+.contato__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contato__info {
+  background: #f8f8f8;
+  padding: 24px;
+  border-radius: 10px;
+}
+
+.contato__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contato__form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.contato__form input,
+.contato__form textarea {
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.contato__btn {
+  background: #e1140a; /* vermelho Lenovo */
+  color: white;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contato__btn:hover {
+  background: #000; /* preto ao hover */
+}
+
+.contato__success {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .contato__grid {
+    grid-template-columns: 1fr;
+  }
+}

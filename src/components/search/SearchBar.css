@@ -1,0 +1,112 @@
+/* src/components/search/SearchBar.css */
+
+.searchbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.searchbar__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  font-size: 1rem;
+}
+
+.searchbar__button {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* Panel de sugerencias */
+.searchpanel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 4px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  z-index: 20;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.searchpanel__head {
+  font-weight: 600;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.searchpanel__item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 12px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.searchpanel__item:hover,
+.searchpanel__item.is-active {
+  background: #f7f7f7;
+}
+
+.searchpanel__thumb {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  background: #fafafa;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.searchpanel__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.searchpanel__text {
+  flex: 1;
+}
+
+.searchpanel__name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.searchpanel__price {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.searchpanel__seeall {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+  cursor: pointer;
+}
