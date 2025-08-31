@@ -6,15 +6,14 @@
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
-  
 }
 
 /* ---------- Banda promocional superior ---------- */
 .header__top__promo {
-      height: 38px;
-    padding: 6px 6px 0 16px;
-    background-color: #ededed;
-    align-items: flex-start;
+  height: 38px;
+  padding: 6px 6px 0 16px;
+  background-color: #ededed;
+  align-items: flex-start;
 }
 
 /* ---------- Fila: logo / buscador / íconos ---------- */
@@ -23,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 1.5rem 1rem; /* top right bottom left */
+  padding: 1.5rem 1rem;
   background: #fff;
 }
 
@@ -35,54 +34,34 @@
 
 /* --- Centro: buscador centrado --- */
 .header__search {
-  flex: 1 1 auto;             /* ocupa el espacio central */
+  flex: 1 1 auto;
   display: flex;
-  justify-content: center;    /* centra horizontalmente */
+  justify-content: center;
 }
 
-/* envoltorio para input + botón */
 .header__search-form,
 .header__search form {
   position: relative;
   width: 100%;
-  max-width: 720px;           /* ancho máximo del buscador */
+  max-width: 720px;
 }
 
-/* caja de búsqueda */
 .header__search-input {
   width: 100%;
-  height: 48px;               /* más alto para que se vea robusto */
-  padding: 0 48px 0 16px;     /* espacio a la derecha para la lupa */
+  height: 48px;
+  padding: 0 48px 0 16px;
   border: 2px solid #333;
   border-radius: 8px;
   background: #fff;
   outline: none;
-  font-size: 16px;            /* texto más legible */
+  font-size: 16px;
 }
 
 .header__search-input:focus {
-  border-color: #e1140a;      /* rojo Lenovo */
+  border-color: #e1140a;
   box-shadow: 0 0 0 1px #e1140a;
 }
 
-/* botón con la lupa dentro del input */
-.header__search-btn {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  font-size: 20px;           /* tamaño del icono de búsqueda */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-/* botón de lupa dentro del input */
 .header__search-btn {
   position: absolute;
   top: 50%;
@@ -100,7 +79,6 @@
   transition: all 0.2s ease;
   border-radius: 50%;
 }
-
 .header__search-btn:hover {
   color: #e1140a;
   background: rgba(225, 20, 10, 0.08);
@@ -119,114 +97,166 @@
   font-size: 18px;
   cursor: pointer;
   color: #111;
+  width: 18px;
+  height: 18px;
 }
-
-.header__icon:hover {
-  color: #e1140a;
-}
+.header__icon:hover { color: #e1140a; }
 
 /* ---------- Autenticación de Usuario ---------- */
 .header__user-section {
   position: relative;
   cursor: pointer;
-}
-
-.header__user-login {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
 }
 
-.header__user-login:hover {
-  background-color: #f3f4f6;
-}
-
+/* Botón “login” y “logueado” – base */
+.header__user-login-btn,
 .header__user-info {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
+  gap: 8px;
+  height: 36px;
+  line-height: 1;
+  padding: 6px 10px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-weight: 600;
+  color: #111;
+  position: relative;
 }
+.header__user-login-btn svg,
+.header__user-info svg {
+  width: 18px; height: 18px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.header__user-text { font-size: 14px; margin-top: 1px; }
 
+.header__user-login-btn:hover,
 .header__user-info:hover {
-  background-color: #f3f4f6;
+  color: #111;
 }
 
+/* Subrayado rojo */
+.header__user-login-btn::after,
+.header__user-info::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -10px;
+  height: 3px;
+  background: #e1140a;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .18s ease;
+  pointer-events: none; /* no bloquea clicks */
+}
+.header__user-login:hover .header__user-login-btn::after,
+.header__user-section:hover .header__user-info::after {
+  transform: scaleX(1);
+}
+/* Mostrar subrayado cuando está abierto por click */
+.header__user-login.is-open .header__user-login-btn::after,
+.header__user-section.is-open .header__user-info::after {
+  transform: scaleX(1);
+}
+
+/* Chevron */
+.header__dropdown-arrow {
+  width: 12px; height: 12px;
+  margin-left: 4px;
+  transition: transform .2s ease;
+}
+.header__user-login.is-open .header__dropdown-arrow,
+.header__user-section.is-open .header__dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Info usuario (avatar + nombre) */
 .header__user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   background-color: #e1140a;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
 }
+.header__user-name { font-size: 14px; font-weight: 500; color: #374151; }
 
-.header__user-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: #374151;
-}
-
+/* Menús */
+.header__login-dropdown,
 .header__user-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 14px);
   right: 0;
+  min-width: 320px;
   background: white;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  min-width: 180px;
-  z-index: 50;
-  margin-top: 8px;
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.18);
+  z-index: 9999;
+  padding: 16px;
+}
+/* Flecha (caret) */
+.header__login-dropdown::before,
+.header__user-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 42px; /* ajusta si lo quieres más a la izq/der */
+  width: 16px; height: 16px;
+  background: #fff;
+  border-left: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 3px rgba(0,0,0,.02);
+  z-index: -1;
 }
 
-.header__user-menu-item {
+.header__dropdown-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+  margin: 4px 4px 8px;
+  text-align: left;
+}
+.header__dropdown-help {
   display: block;
+  color: #6b7280;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.header__login-btn {
   width: 100%;
   padding: 12px 16px;
-  text-decoration: none;
-  color: #374151;
-  font-size: 14px;
+  background: #000;
+  color: #fff;
   border: none;
-  background: none;
-  text-align: left;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: opacity .15s ease;
+  margin: 8px 0 12px;
 }
+.header__login-btn:hover { opacity: .9; }
 
-.header__user-menu-item:hover {
-  background-color: #f9fafb;
-  color: #111827;
+.header__dropdown-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  color: #222;
 }
-
-.header__user-menu-item:first-child {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.header__user-menu-item:last-child {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.header__logout-btn {
-  border-top: 1px solid #e5e7eb;
-  color: #dc2626;
-}
-
-.header__logout-btn:hover {
-  background-color: #fef2f2;
-  color: #b91c1c;
-}
+.header__dropdown-item:hover { background: #f7f7f7; }
+.header__dropdown-icon { width: 18px; height: 18px; color: #111; }
 
 /* ---------- Navegación ---------- */
 .header__nav {
@@ -236,10 +266,7 @@
   gap: 16px;
   padding: 1rem;
   background: #fff;
-  
 }
-
-/* Listas izquierda y derecha */
 .header__nav--left,
 .header__nav--right {
   display: flex;
@@ -248,9 +275,7 @@
   margin: 0;
   padding: 0;
   gap: 1.5rem;
-  
 }
-
 .header__nav--left li,
 .header__nav--right li {
   line-height: 1;
@@ -260,52 +285,38 @@
   padding: 4px 8px;
   border-radius: 4px;
 }
-
 .header__nav--left li:hover,
 .header__nav--right li:hover {
   color: #e1140a;
   background: rgba(225, 20, 10, 0.08);
 }
-
-.header__nav--left .active {
-  font-weight: 800;   /* más negrita */
-  color: #000;        /* opcional: cambia color */
-}
+.header__nav--left .active { font-weight: 800; color: #000; }
 
 /* ---------- Banda inferior ---------- */
 .header__bottom {
-  background: #E6F4FA;
+  background: #ededed;
   padding: 0.5rem;
   text-align: center;
-  font-size: 16px;
-  height: 65px;
-  display: flex;         
-  justify-content: center;
-  align-items: center;
+  font-size: 14px;
 }
 
-/* src/components/SearchBar.css */
-
-/* Contenedor del form */
+/* ---------- SearchBar (contenedor) ---------- */
 .searchbar {
   display: flex;
   align-items: center;
-  max-width: 500px;     /* ancho máximo */
+  max-width: 500px;
   width: 100%;
-  margin: 0 auto;       /* centra si es bloque */
+  margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
   overflow: hidden;
   transition: box-shadow .2s ease;
 }
-
 .searchbar:focus-within {
-  box-shadow: 0 0 0 2px #2563eb33; /* azul suave cuando se activa */
+  box-shadow: 0 0 0 2px #2563eb33;
   border-color: #2563eb;
 }
-
-/* Input */
 .searchbar__input {
   flex: 1;
   border: none;
@@ -314,12 +325,7 @@
   font-size: 0.95rem;
   color: #111;
 }
-
-.searchbar__input::placeholder {
-  color: #888;
-}
-
-/* Botón */
+.searchbar__input::placeholder { color: #888; }
 .searchbar__button {
   background: transparent;
   border: none;
@@ -332,61 +338,13 @@
   justify-content: center;
   transition: color .2s ease, transform .2s ease;
 }
-
 .searchbar__button:hover {
-  color: #2563eb;      /* azul Lenovo */
+  color: #2563eb;
   transform: scale(1.1);
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .searchbar {
-    max-width: 100%;
-  }
-  .searchbar__input {
-    font-size: 0.9rem;
-    padding: 10px 12px;
-  }
-}
-
-
-/* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
-  .header__nav--right { gap: 1rem; }
-}
-
-@media (max-width: 768px) {
-  .header__top {
-    gap: 12px;
-    padding: 1rem;
-  }
-
-  .header__logo { height: 32px; }
-
-  .header__search-form,
-  .header__search form {
-    max-width: 100%;
-  }
-
-  .header__nav {
-    flex-wrap: wrap;
-    gap: 8px 16px;
-  }
-
-  .header__nav--right { display: none; } /* opcional: ocultar menú derecho en móvil */
-}
-
-@media (max-width: 480px) {
-  .header__icon { font-size: 16px; }
-  .header__search-input { height: 40px; }
-  .header__search-btn { right: 8px; }
-}
-
 /* ---------- Cart Tooltip Styles ---------- */
-.header__cart-container {
-  position: relative;
-}
-
+.header__cart-container { position: relative; }
 .header__cart-link {
   position: relative;
   display: flex;
@@ -394,7 +352,6 @@
   text-decoration: none;
   color: inherit;
 }
-
 .header__cart-badge {
   position: absolute;
   top: -8px;
@@ -410,7 +367,6 @@
   font-size: 12px;
   font-weight: bold;
 }
-
 .header__cart-tooltip {
   position: absolute;
   top: 100%;
@@ -424,242 +380,61 @@
   margin-top: 8px;
   padding-top: 8px;
 }
-
-.cart-tooltip__header {
-  padding: 16px;
-  border-bottom: 1px solid #eee;
-}
-
-.cart-tooltip__header h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-}
-
-.cart-tooltip__items {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.cart-tooltip__item {
-  padding: 12px 16px;
-  border-bottom: 1px solid #f5f5f5;
-}
-
-.cart-tooltip__item:last-child {
-  border-bottom: none;
-}
-
+.cart-tooltip__header { padding: 16px; border-bottom: 1px solid #eee; }
+.cart-tooltip__header h3 { margin: 0; font-size: 16px; font-weight: 600; color: #333; }
+.cart-tooltip__items { max-height: 300px; overflow-y: auto; }
+.cart-tooltip__item { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; }
+.cart-tooltip__item:last-child { border-bottom: none; }
 .cart-tooltip__item-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
 }
-
 .cart-tooltip__item-image {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 4px;
-  border: 1px solid #eee;
+  width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #eee;
 }
-
-.cart-tooltip__item-info {
-  flex: 1;
-}
-
-.cart-tooltip__item-name {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  line-height: 1.3;
-}
-
-.cart-tooltip__item-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+.cart-tooltip__item-info { flex: 1; }
+.cart-tooltip__item-name { margin: 0; font-size: 14px; font-weight: 500; color: #333; line-height: 1.3; }
+.cart-tooltip__item-bottom { display: flex; justify-content: space-between; align-items: center; }
 .cart-tooltip__item-controls {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 6px;
-  border: 2px solid #A4A2A2;
-  border-radius: 15px;
-  background: white;
+  display: flex; align-items: center; gap: 0; padding: 6px;
+  border: 2px solid #A4A2A2; border-radius: 15px; background: white;
 }
-
 .cart-tooltip__control-btn {
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  transition: all 0.15s ease;
+  width: 40px; height: 40px; border: none; border-radius: 0;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  font-size: 16px; transition: all 0.15s ease;
 }
-
-.cart-tooltip__remove-btn {
-  background: white;
-  color: black;
-  border-right: 1px solid #333;
-}
-
-.cart-tooltip__remove-btn:hover {
-  background: #f5f5f5;
-  transform: scale(1.05);
-}
-
-.cart-tooltip__add-btn {
- background: #fff;
-  color: #4E444E;
-}
-
-.cart-tooltip__add-btn:hover {
-  background: #f5f5f5;
-  transform: scale(1.05);
-}
-
+.cart-tooltip__remove-btn { background: white; color: black; border-right: 1px solid #333; }
+.cart-tooltip__remove-btn:hover { background: #f5f5f5; transform: scale(1.05); }
+.cart-tooltip__add-btn { background: #fff; color: #4E444E; }
+.cart-tooltip__add-btn:hover { background: #f5f5f5; transform: scale(1.05); }
 .cart-tooltip__quantity {
-  background: white;
-  border: none;
-  border-right: 1px solid #333;
-  border-radius: 0;
-  padding: 8px 12px;
-  font-size: 16px;
-  font-weight: 500;
-  min-width: 40px;
-  text-align: center;
+  background: white; border: none; border-right: 1px solid #333; border-radius: 0;
+  padding: 8px 12px; font-size: 16px; font-weight: 500; min-width: 40px; text-align: center;
 }
-
-.cart-tooltip__item-price {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-}
-
-.cart-tooltip__footer {
-  padding: 16px;
-  border-top: 1px solid #eee;
-  background: #f9f9f9;
-}
-
+.cart-tooltip__item-price { font-size: 14px; font-weight: 600; color: #333; }
+.cart-tooltip__footer { padding: 16px; border-top: 1px solid #eee; background: #f9f9f9; }
 .cart-tooltip__total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px; font-size: 16px; font-weight: 600; color: #333;
 }
-
 .cart-tooltip__view-cart-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background: #000;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  display: block; width: 100%; padding: 12px; background: #000; color: white;
+  text-decoration: none; text-align: center; border-radius: 6px; font-weight: 500; transition: all 0.2s ease;
 }
+.cart-tooltip__view-cart-btn:hover { background: rgba(0, 0, 0, 0.7); color: white; }
 
-.cart-tooltip__view-cart-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) { .header__nav--right { gap: 1rem; } }
+@media (max-width: 768px) {
+  .header__top { gap: 12px; padding: 1rem; }
+  .header__logo { height: 32px; }
+  .header__search-form, .header__search form { max-width: 100%; }
+  .header__nav { flex-wrap: wrap; gap: 8px 16px; }
+  .header__nav--right { display: none; }
+  .header__user-text { display: none; }
 }
-
-/* User section styles */
-.header__user-section {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.header__user-text {
-  font-size: 14px;
-  color: #333;
-  font-weight: 500;
-}
-
-
-.header__dropdown-arrow {
-  font-size: 12px;
-  margin-left: 4px;
-  transition: transform 0.2s ease;
-}
-
-.header__login-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 280px;
-  z-index: 1000;
-  padding: 16px;
-  margin-top: 8px;
-  padding-top: 24px;
-}
-
-.header__dropdown-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.header__login-btn {
-  width: 100%;
-  padding: 12px 16px;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 16px;
-}
-
-.header__dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: 12px 8px;
-  color: #666;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.header__dropdown-item:hover {
-  background: #f5f5f5;
-  color: #333;
-}
-
-.header__dropdown-icon {
-  margin-right: 12px;
-  font-size: 16px;
-  color: #666;
-}
-
-.header__dropdown-item:hover .header__dropdown-icon {
-  color: #333;
+@media (max-width: 480px) {
+  .header__icon { font-size: 16px; }
+  .header__search-input { height: 40px; }
+  .header__search-btn { right: 8px; }
 }
