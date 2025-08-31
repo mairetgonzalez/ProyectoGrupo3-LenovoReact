@@ -39,7 +39,7 @@ export default function SobreNos() {
                         Objetivo acadêmico
                     </p>
                     <p className="textBox">
-                        Nosso principal objetivo é aplicar os conhecimentos de React que adquirimos, desde componentes reutilizáveis até o gerenciamento de estados e rotas. Também queremos praticar boas práticas de programação, trabalho em equipe e aprender a usar ferramentas modernas que fazem parte do dia a dia de um desenvolvedor Front-End.
+                        Nosso principal objetivo é aplicar os conhecimentos de React que adquirimos, desde o mais basico de HTML, CSS e JavaScript, até versionamennto no GitHub. Também queremos praticar boas práticas de programação, trabalho em equipe e aprender a usar ferramentas modernas que fazem parte do dia a dia de um desenvolvedor Front-End.
                     </p>
                 </div>
                 <div className="quadroBox">
