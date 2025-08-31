@@ -1,4 +1,4 @@
-import IntegrantesCards from "./integrantesCards";
+import IntegrantesCards from "./IntegrantesCards";
 import quemSomos from "../assets/fotosIntegrantes/quemSomos.png"
 
 export default function SobreNos() {
