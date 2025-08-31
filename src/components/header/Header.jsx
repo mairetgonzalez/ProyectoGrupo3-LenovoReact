@@ -1,4 +1,3 @@
-// src/components/header/Header.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
@@ -105,10 +104,18 @@ const Header = () => {
         {/* Ações rápidas */}
         <div className="header__icons">
           {/* Usuario / Auth */}
-          <div className="header__user-section" ref={isAuthenticated ? userMenuRef : loginDropdownRef}>
+          <div
+            className={`header__user-section ${isAuthenticated ? (showUserMenu ? 'is-open' : '') : ''}`}
+            ref={isAuthenticated ? userMenuRef : loginDropdownRef}
+          >
             {isAuthenticated ? (
               <>
-                <button className="header__user-info" onClick={handleAuthClick}>
+                <button
+                  type="button"
+                  className="header__user-info"
+                  onClick={handleAuthClick}
+                  aria-expanded={showUserMenu}
+                >
                   <div className="header__user-avatar">
                     {typeof getUserInitials === 'function' ? getUserInitials(user) : (user?.nome?.[0] || 'U')}
                   </div>
@@ -132,12 +139,13 @@ const Header = () => {
                 )}
               </>
             ) : (
-              <div
-                className="header__user-login"
-                onMouseEnter={() => setShowLoginDropdown(true)}
-                onMouseLeave={() => setShowLoginDropdown(false)}
-              >
-                <button className="header__user-login-btn" onClick={handleAuthClick}>
+              <div className={`header__user-login ${showLoginDropdown ? 'is-open' : ''}`} ref={loginDropdownRef}>
+                <button
+                  type="button"
+                  className="header__user-login-btn"
+                  onClick={handleAuthClick}
+                  aria-expanded={showLoginDropdown}
+                >
                   <FaUser className="header__icon" />
                   <span className="header__user-text">Iniciar sessão / Criar conta</span>
                   <FaChevronDown className="header__dropdown-arrow" />
@@ -149,17 +157,29 @@ const Header = () => {
                     <button className="header__login-btn" onClick={handleLoginButtonClick}>
                       Iniciar sessão / Criar conta
                     </button>
+
                     <div className="header__dropdown-item">
                       <FaUserCircle className="header__dropdown-icon" />
-                      <span>Perfil</span>
+                      <div>
+                        <div>Perfil</div>
+                        <small className="header__dropdown-help">Editar nome da conta, senha e configurações</small>
+                      </div>
                     </div>
+
                     <div className="header__dropdown-item">
                       <FaClipboardList className="header__dropdown-icon" />
-                      <span>Pedidos</span>
+                      <div>
+                        <div>Pedidos</div>
+                        <small className="header__dropdown-help">Visualize e acompanhe seus pedidos</small>
+                      </div>
                     </div>
+
                     <div className="header__dropdown-item">
                       <FaHeart className="header__dropdown-icon" />
-                      <span>Lista de desejos</span>
+                      <div>
+                        <div>Lista de desejos</div>
+                        <small className="header__dropdown-help">Crie sua lista de produtos favoritos</small>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -191,7 +211,9 @@ const Header = () => {
                 onMouseLeave={safeMouseLeave}
               >
                 <div className="cart-tooltip__header">
-                  <h3>Carrinho ({cartItemsCount} {cartItemsCount === 1 ? 'item' : 'itens'})</h3>
+                  <h3>
+                    Carrinho ({cartItemsCount} {cartItemsCount === 1 ? 'item' : 'itens'})
+                  </h3>
                 </div>
 
                 <div className="cart-tooltip__items">
@@ -296,7 +318,9 @@ const Header = () => {
       <nav className="header__nav">
         <ul className="header__nav--left">
           <li className="has-submenu">
-            <NavLink to="/" end>Home</NavLink>
+            <NavLink to="/" end>
+              Home
+            </NavLink>
           </li>
           <li className="has-submenu">
             <NavLink to="/produtos">Loja</NavLink>
@@ -309,9 +333,15 @@ const Header = () => {
           </li>
         </ul>
         <ul className="header__nav--right">
-          <li><NavLink to="/empresa">Empresa</NavLink></li>
-          <li><NavLink to="/educacao">Educação</NavLink></li>
-          <li><NavLink to="/gaming">Gaming</NavLink></li>
+          <li>
+            <NavLink to="/empresa">Empresa</NavLink>
+          </li>
+          <li>
+            <NavLink to="/educacao">Educação</NavLink>
+          </li>
+          <li>
+            <NavLink to="/gaming">Gaming</NavLink>
+          </li>
         </ul>
       </nav>
 

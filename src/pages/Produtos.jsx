@@ -8,19 +8,47 @@ import "../styles/produtos.css";
 
 // Palabras/aliases que el usuario puede escribir para cada categoría
 const CATEGORY_ALIASES = {
-  notebooks: ["notebook", "notebooks", "laptop", "laptops", "portátil", "portatil"],
+  notebooks: ["notebook", "notebooks", "laptop", "laptops", "portátil", "portatil", "note"],
   desktops:  ["desktop", "pc", "computador", "computadora"],
   monitores: ["monitor", "monitores", "pantalla"],
   mobile:    ["celular", "telefono", "telefone", "smartphone", "móvil", "movil"],
   tablets:   ["tablet", "tablets", "tableta"],
 };
 
-// Normaliza texto para comparar sin acentos y en minúsculas
+// 🔗 Mapa de IDs reales del backend (según tu API)
+const CATEGORY_ID_BY_SLUG = {
+  notebooks: 1,
+  desktops: 2,
+  mobile: 3,     // Smartphones
+  tablets: 4,
+  monitores: 5,
+};
+
+const CATEGORY_NAME_BY_ID = {
+  1: "Notebooks",
+  2: "Desktops",
+  3: "Smartphones",
+  4: "Tablets",
+  5: "Monitores",
+};
+
+// Normaliza texto para comparar sin acentos y en minúsculas + reduce letras repetidas (noteboook → notebook)
 const norm = (s) =>
   String(s || "")
     .toLowerCase()
     .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "");
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/(.)\1{2,}/g, "$1");
+
+// 🧠 infiere ID de categoría desde el texto de búsqueda (q)
+function inferCategoryIdFromQuery(qNorm) {
+  for (const [slug, aliases] of Object.entries(CATEGORY_ALIASES)) {
+    if (aliases.some(a => qNorm.includes(norm(a)) || norm(a).includes(qNorm))) {
+      return CATEGORY_ID_BY_SLUG[slug];
+    }
+  }
+  return null;
+}
 
 export default function Produtos() {
   const navigate = useNavigate();
@@ -35,6 +63,7 @@ export default function Produtos() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const q = (searchParams.get("q") || "").trim().toLowerCase();
+  const qNorm = norm(q);
 
   // --- categoría desde el hook ---
   const { ready, categoriaId, categoriaNome } = useCategoriaFiltro();
@@ -50,6 +79,9 @@ export default function Produtos() {
           name: p.nome,
           price: p.preco,
           image: p.imagens?.[0]?.url || p.imagens?.[0] || "",
+          // 👇 guardamos info de categoría para filtros client-side robustos
+          categoriaId: Number(p.categoriaId ?? p.categoria?.id ?? 0),
+          categoriaNome: p.categoria?.nome || CATEGORY_NAME_BY_ID[p.categoriaId] || "",
           raw: p,
         }));
         setItems(mapped);
@@ -61,38 +93,45 @@ export default function Produtos() {
   // 1) Filtro por categoría (fallback client-side si el backend no filtró)
   const visibleByCategory = useMemo(() => {
     if (!categoriaId) return items;
-    return items.filter((it) => Number(it.raw?.categoriaId) === Number(categoriaId));
+    return items.filter((it) =>
+      Number(it.categoriaId ?? it.raw?.categoriaId ?? it.raw?.categoria?.id) === Number(categoriaId)
+    );
   }, [items, categoriaId]);
 
   // 2) Filtro por texto (?q=) aplicado sobre el resultado anterior
   const finalItems = useMemo(() => {
     if (!q) return visibleByCategory;
 
-    const nq = norm(q);
+    const nq = qNorm;
 
-    const qMatchesAlias = (slug) =>
-      (CATEGORY_ALIASES[slug] || []).some((alias) => nq.includes(alias));
-
-    const wantsNotebooks = qMatchesAlias("notebooks");
-    const wantsDesktops  = qMatchesAlias("desktops");
-    const wantsMonitores = qMatchesAlias("monitores");
-    const wantsMobile    = qMatchesAlias("mobile");
-    const wantsTablets   = qMatchesAlias("tablets");
+    // 👇 Si q parece ser una categoría (monitor/computador/noteboook...), usamos ID inferido
+    const inferredCatId = inferCategoryIdFromQuery(nq);
 
     return visibleByCategory.filter((p) => {
       const name = norm(p.name || p.raw?.nome);
       const priceStr = norm(String(p.price ?? p.raw?.preco ?? ""));
-      const catName = norm(p.raw?.categoria?.nome || ""); // si tu API trae categoria embebida
+      const catName = norm(p.categoriaNome || p.raw?.categoria?.nome || "");
+
+      // 0) Coincidencia directa por categoriaId si inferimos categoría por q
+      const catIdMatch = inferredCatId
+        ? Number(p.categoriaId ?? p.raw?.categoriaId ?? p.raw?.categoria?.id) === Number(inferredCatId)
+        : false;
 
       // 1) Coincidencia por nombre, precio o nombre de categoría
       const hitsFreeText = name.includes(nq) || priceStr.includes(nq) || catName.includes(nq);
 
-      // 2) Coincidencia por alias deducida del nombre del producto
-      const nameHintsNotebook = /notebook|laptop|port[áa]til/.test(name);
+      // 2) Coincidencia por alias deducida del nombre del producto (por si el backend no trae catName)
+      const nameHintsNotebook = /notebook|laptop|portatil/.test(name);
       const nameHintsDesktop  = /desktop|computador|computadora|pc\b/.test(name);
       const nameHintsMonitor  = /monitor|pantalla/.test(name);
-      const nameHintsMobile   = /celular|telefono|telefone|smartphone|m[oó]vil/.test(name);
+      const nameHintsMobile   = /celular|telefono|telefone|smartphone|movil/.test(name);
       const nameHintsTablet   = /tablet|tableta/.test(name);
+
+      const wantsNotebooks = CATEGORY_ALIASES.notebooks.some(a => nq.includes(norm(a)));
+      const wantsDesktops  = CATEGORY_ALIASES.desktops.some(a => nq.includes(norm(a)));
+      const wantsMonitores = CATEGORY_ALIASES.monitores.some(a => nq.includes(norm(a)));
+      const wantsMobile    = CATEGORY_ALIASES.mobile.some(a => nq.includes(norm(a)));
+      const wantsTablets   = CATEGORY_ALIASES.tablets.some(a => nq.includes(norm(a)));
 
       const hitsAliasByName =
         (wantsNotebooks && nameHintsNotebook) ||
@@ -103,15 +142,15 @@ export default function Produtos() {
 
       // 3) Coincidencia por alias en el nombre de categoría (si existe)
       const hitsAliasByCatName =
-        (wantsNotebooks && /notebook|laptop|port[áa]til/.test(catName)) ||
+        (wantsNotebooks && /notebook|laptop|portatil/.test(catName)) ||
         (wantsDesktops  && /desktop|computador|computadora|pc\b/.test(catName)) ||
         (wantsMonitores && /monitor|pantalla/.test(catName)) ||
-        (wantsMobile    && /celular|telefono|telefone|smartphone|m[oó]vil/.test(catName)) ||
+        (wantsMobile    && /celular|telefono|telefone|smartphone|movil/.test(catName)) ||
         (wantsTablets   && /tablet|tableta/.test(catName));
 
-      return hitsFreeText || hitsAliasByName || hitsAliasByCatName;
+      return catIdMatch || hitsFreeText || hitsAliasByName || hitsAliasByCatName;
     });
-  }, [visibleByCategory, q]);
+  }, [visibleByCategory, q, qNorm]);
 
   if (loading || !ready) return <div style={{ padding: 16 }}>Carregando…</div>;
   if (err) {
