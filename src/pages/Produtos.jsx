@@ -86,7 +86,7 @@ export default function Produtos(){
               onClick={() => addToCart(item.raw)}
               style={{
                 marginTop:"auto",
-                background: isInCart(item.id) ? "#28a745" : "#e1140a",
+                background: "#000",
                 color:"#fff",
                 border:0,
                 borderRadius:8,
@@ -95,10 +95,16 @@ export default function Produtos(){
                 fontWeight:600,
                 transition: "background-color 0.3s ease"
               }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = "rgba(0, 0, 0, 0.7)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = "#000";
+              }}
             >
               {isInCart(item.id) 
-                ? `En carrito (${getItemQuantity(item.id)})` 
-                : "Adicionar ao carrinho"
+                ? `No carrinho (${getItemQuantity(item.id)})` 
+                : "Comprar"
               }
             </button>
           </article>
