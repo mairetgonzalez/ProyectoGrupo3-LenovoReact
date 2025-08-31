@@ -1,6 +1,39 @@
+.produtos article {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
 .produtos article:hover {
-  border: 1px solid #000; 
-  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer; 
-  transition: all 0.3s ease; 
+  border: 1px solid #000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+
+.produtos article img {
+  transition: transform 0.3s ease;
+}
+
+.produtos article:hover img {
+  transform: scale(1.02);
+}
+
+
+.produtos article h3 {
+  transition: color 0.2s ease;
+}
+
+.produtos article:hover h3 {
+  color: #e1140a;
+}
+
+
+.produtos article .price {
+  transition: all 0.2s ease;
+}
+
+.produtos article:hover .price {
+  font-weight: 600;
+  color: #333;
 }

@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import SobreNos from './pages/SobreNos';
 import ProductDetail from './pages/ProductDetail';
 import CartProvider from './store/CartContext';
+import { AuthProvider } from './store/AuthContext';
 
 
 // ✅ Home mínimo (si aún no tienes un Home.jsx)
@@ -23,29 +24,31 @@ function Home() {
 
 export default function App(){
   return (
-    <CartProvider>
-      <Header />
-      <Routes>
-        {/* Página principal */}
-        <Route path="/" element={<Home />} />
+    <AuthProvider>
+      <CartProvider>
+        <Header />
+        <Routes>
+          {/* Página principal */}
+          <Route path="/" element={<Home />} />
 
-        {/* Lista de productos (ruta del front) */}
-        <Route path="/produtos" element={<Produtos />} />
-        
-        {/* Detalle de producto */}
-        <Route path="/produto/:id" element={<ProductDetail />} />
+          {/* Lista de productos (ruta del front) */}
+          <Route path="/produtos" element={<Produtos />} />
+          
+          {/* Detalle de producto */}
+          <Route path="/produto/:id" element={<ProductDetail />} />
 
-        {/* Página del carrito */}
-        <Route path="/cart" element={<Cart />} />
+          {/* Página del carrito */}
+          <Route path="/cart" element={<Cart />} />
 
-        {/* Lista de integrantes */}
-        <Route path="/sobre" element={<SobreNos />} />
+          {/* Lista de integrantes */}
+          <Route path="/sobre" element={<SobreNos />} />
 
-        {/* Redirección para rutas desconocidas */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      <Footer />
-    </CartProvider>
+          {/* Redirección para rutas desconocidas */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

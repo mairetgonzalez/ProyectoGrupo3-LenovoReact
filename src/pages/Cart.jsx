@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../store/CartContext';
-import { FaTrash, FaPlus, FaMinus, FaTimes } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { FaTrash, FaPlus, FaMinus, FaTimes, FaCheck, FaSpinner } from 'react-icons/fa';
+import { NavLink, useNavigate } from 'react-router-dom';
+import CheckoutForm from '../components/checkout/CheckoutForm';
+import './Cart.css';
+
+// Estilos para la animación del spinner
+const spinnerStyle = `
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+
+if (!document.querySelector('#spinner-styles')) {
+  const styleSheet = document.createElement('style');
+  styleSheet.id = 'spinner-styles';
+  styleSheet.textContent = spinnerStyle;
+  document.head.appendChild(styleSheet);
+}
 
 const Cart = () => {
+  const navigate = useNavigate();
   const {
     cartItems,
     removeFromCart,
@@ -14,8 +33,55 @@ const Cart = () => {
     getCartItemsCount
   } = useCart();
 
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [orderCompleted, setOrderCompleted] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(null);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+
   const total = getCartTotal();
   const itemsCount = getCartItemsCount();
+
+  
+  const generateOrderNumber = () => {
+    const timestamp = Date.now().toString().slice(-6);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    return `LNV-${timestamp}-${random}`;
+  };
+
+ 
+  const handleCheckout = () => {
+    if (isProcessing || orderCompleted) return;
+    setShowCheckoutForm(true);
+  };
+  
+  const handleCheckoutComplete = async () => {
+    setIsProcessing(true);
+    setShowCheckoutForm(false);
+    
+    try {
+      
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+    
+      const newOrderNumber = generateOrderNumber();
+      setOrderNumber(newOrderNumber);
+      setOrderCompleted(true);
+      
+  
+      setTimeout(() => {
+        clearCart();
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Error en el checkout:', error);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+  
+  const handleCheckoutCancel = () => {
+    setShowCheckoutForm(false);
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -37,7 +103,7 @@ const Cart = () => {
         <NavLink 
           to="/produtos" 
           style={{
-            background: '#e1140a',
+            background: '#000',
             color: 'white',
             padding: '12px 24px',
             borderRadius: '8px',
@@ -109,13 +175,16 @@ const Cart = () => {
               background: '#fff'
             }}>
               {/* Imagen del producto */}
-              <div style={{
-                width: '100px',
-                height: '80px',
-                borderRadius: '6px',
-                overflow: 'hidden',
-                background: '#f7f7f7'
-              }}>
+              <div 
+                onClick={() => navigate(`/produto/${item.id}`)}
+                style={{
+                  width: '100px',
+                  height: '80px',
+                  borderRadius: '6px',
+                  overflow: 'hidden',
+                  background: '#f7f7f7',
+                  cursor: 'pointer'
+                }}>
                 {item.imagens?.[0]?.url ? (
                   <img 
                     src={item.imagens[0].url} 
@@ -142,7 +211,15 @@ const Cart = () => {
 
               {/* Información del producto */}
               <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.1rem', color: '#333' }}>
+                <h3 
+                  onClick={() => navigate(`/produto/${item.id}`)}
+                  style={{ 
+                    margin: '0 0 0.5rem 0', 
+                    fontSize: '1.1rem', 
+                    color: '#333',
+                    cursor: 'pointer'
+                  }}
+                >
                   {item.nome}
                 </h3>
                 <p style={{ margin: 0, color: '#666', fontSize: '0.9rem' }}>
@@ -292,7 +369,7 @@ const Cart = () => {
             fontWeight: 'bold'
           }}>
             <span>Total:</span>
-            <span style={{ color: '#e1140a' }}>
+            <span style={{ color: '#1f1312' }}>
               R$ {total.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -300,27 +377,75 @@ const Cart = () => {
             </span>
           </div>
           
-          <button style={{
-            width: '100%',
-            background: '#e1140a',
-            color: 'white',
-            border: 'none',
-            padding: '12px',
-            borderRadius: '8px',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer',
-            marginBottom: '1rem'
-          }}>
-            Finalizar Compra
-          </button>
+          <button 
+            onClick={handleCheckout}
+            disabled={isProcessing || orderCompleted}
+            style={{
+              width: '100%',
+              background: orderCompleted ? '#28a745' : (isProcessing ? '#6c757d' : '#1b0504'),
+              color: 'white',
+              border: 'none',
+              padding: '12px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: isProcessing || orderCompleted ? 'not-allowed' : 'pointer',
+              marginBottom: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.3s ease'
+            }}
+          >
+            {isProcessing ? (
+               <>
+                 <FaSpinner style={{ animation: 'spin 1s linear infinite' }} />
+                 Processando...
+               </>
+             ) : orderCompleted ? (
+               <>
+                 <FaCheck />
+                 Pedido Realizado!
+               </>
+             ) : (
+               'Finalizar Compra'
+             )}
+           </button>
+           
+           {orderCompleted && orderNumber && (
+             <div style={{
+               background: '#d4edda',
+               border: '1px solid #c3e6cb',
+               borderRadius: '8px',
+               padding: '12px',
+               marginBottom: '1rem',
+               textAlign: 'center'
+             }}>
+               <p style={{ 
+                 margin: '0 0 8px 0', 
+                 color: '#155724',
+                 fontWeight: '600',
+                 fontSize: '0.95rem'
+               }}>
+                 ✅ Compra realizada com sucesso!
+               </p>
+               <p style={{ 
+                 margin: 0, 
+                 color: '#155724',
+                 fontSize: '0.9rem'
+               }}>
+                 Número do pedido: <strong>{orderNumber}</strong>
+               </p>
+             </div>
+           )}
           
           <NavLink 
             to="/produtos"
             style={{
               display: 'block',
               textAlign: 'center',
-              color: '#e1140a',
+              color: '#0c0b0b',
               textDecoration: 'none',
               fontSize: '0.95rem'
             }}
@@ -329,6 +454,15 @@ const Cart = () => {
           </NavLink>
         </div>
       </div>
+      
+      {showCheckoutForm && (
+        <CheckoutForm
+          cartItems={cartItems}
+          totalPrice={total}
+          onComplete={handleCheckoutComplete}
+          onCancel={handleCheckoutCancel}
+        />
+      )}
     </div>
   );
 };
