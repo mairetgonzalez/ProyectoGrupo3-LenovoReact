@@ -274,11 +274,14 @@
 
 /* ---------- Banda inferior ---------- */
 .header__bottom {
-  background: #ededed;
+  background: #E6F4FA;
   padding: 0.5rem;
   text-align: center;
-  font-size: 14px;
-
+  font-size: 16px;
+  height: 65px;
+  display: flex;         
+  justify-content: center;
+  align-items: center;
 }
 
 /* ---------- Responsive ---------- */

@@ -18,15 +18,17 @@
     height: 459px;
     display: block;
     margin-bottom: 60px;
+     object-fit: cover;
+    object-position: center; 
 }
 
 .textoSoreImagem {
     position: absolute;
-    top: 60%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 48px;
+    font-size: 32px;
     font-weight: bold;
     text-align: center;
 }
@@ -66,7 +68,6 @@
     display: flex;
     flex-direction: column;
     border: 1px solid #c5c3c3;
-    border-radius: 8px;
     background: white url('../assets/fotosIntegrantes/fundoLong.png') no-repeat center center;
     background-size: cover;
     overflow: hidden;
@@ -76,23 +77,24 @@
 }
 
 .integrantesCards:hover {
-    flex-direction: column-reverse;
     border: 2px solid #294E95;
     box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
+    -webkit-text-stroke: 0.2px black
 }
 
 .integranteFoto {
-    border-radius: 8px;
-    width: 100%;
-    height: auto;
+    border-radius: 4px;
+    width: 70%;
+    height: 250px;
     object-fit: cover;
     display: block;
+    margin: 0 auto;
 }
 
 .nomeIntegrante {
     color: white;
     text-align: center;
-    font-size: 30px;
+    font-size: 28px;
     margin: 5px 5px 15px 5px;
 }
 
@@ -132,6 +134,7 @@ p {
     align-items: flex-start;
     border-radius: 8px;
     line-height: 1.4;
+    padding: 2px;
 }
 
 .interesseIntegrante .icon {
@@ -146,8 +149,7 @@ p {
 .emailIntegrante,
 .telefoneIntegrante {
     margin: 3px 0;
-    font-size: 16px;
-    /*Entre 16px e 18px*/
+    font-size: 16px;  /*Entre 16px e 18px*/
     color: white;
 
 }
@@ -178,16 +180,21 @@ p {
     font-family: Lato, Helvetica, Arial, sans-serif;
 }
 
-.quadroBox{
+.quadroBox {
     width: 76%;
     border: 1px solid #555;
     border-left: 6px solid #2507d1;
-    background-color: #f9f9f9;
+    background-color: #fff;
     padding: 16px;
     margin: 20px auto;
 }
 
-.quadroBox2{
+.quadroBox:hover {
+    border-left: 6px solid #442387;
+    box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.quadroBox2 {
     padding-top: 30px;
     padding-bottom: 80px;
 }
