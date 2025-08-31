@@ -207,7 +207,7 @@ export default function ProductDetail() {
             onClick={() => addToCart(product)}
             style={{
               width: "100%",
-              background: isInCart(product.id) ? "#28a745" : "#3A5998", // Color azul como en la imagen
+              background: isInCart(product.id) ? "#007bff" : "#007bff", // Color azul como en la imagen
               color: "#fff",
               border: 0,
               borderRadius: "8px",
@@ -219,20 +219,48 @@ export default function ProductDetail() {
               transition: "all 0.3s ease" 
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.background = isInCart(product.id) ? "#28a745" : "#EAEEF5";
-              e.currentTarget.style.color = isInCart(product.id) ? "#fff" : "#3A5998"; // Texto azul cuando el fondo es claro
+              e.currentTarget.style.background = isInCart(product.id) ? "##294E95" : "#EAEEF5";
+              e.currentTarget.style.color = isInCart(product.id) ? "#fff" : "#007bff"; // Texto azul cuando el fondo es claro
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.background = isInCart(product.id) ? "#28a745" : "#3A5998";
+              e.currentTarget.style.background = isInCart(product.id) ? "##294E95" : "#007bff";
               e.currentTarget.style.color = "#fff"; // Volver al color blanco
             }}
           >
             {isInCart(product.id) 
-              ? `En carrito (${getItemQuantity(product.id)})` 
+              ? `No carrinho (${getItemQuantity(product.id)})` 
               : "Adicionar ao Carrinho"
             }
           </button>
           
+          {/* Botón Comprar */}
+          <button
+            onClick={() => {
+              addToCart(product);
+              navigate('/cart');
+            }}
+            style={{
+              width: "100%",
+              background: "#000",
+              color: "#fff",
+              border: 0,
+              borderRadius: "8px",
+              padding: "16px",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer",
+              marginBottom: "16px",
+              transition: "all 0.3s ease"
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = "rgba(0, 0, 0, 0.7)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = "#000";
+            }}
+          >
+            Comprar
+          </button>
          
           <div style={{display: "flex", alignItems: "center", marginBottom: "24px"}}>
             <IoShareSocialOutline style={{marginRight: "8px"}} />
