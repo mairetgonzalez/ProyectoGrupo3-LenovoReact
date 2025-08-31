@@ -1,29 +1,48 @@
-import React, { useState } from 'react';
+// src/components/header/Header.jsx
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaUser, FaShoppingCart, FaHeart, FaSearch, FaTrash, FaPlus, FaMinus } from 'react-icons/fa';
+import {
+  FaUser,
+  FaShoppingCart,
+  FaHeart,
+  FaTrash,
+  FaPlus,
+  FaMinus,
+  FaUserCircle,
+  FaClipboardList,
+  FaChevronDown,
+} from 'react-icons/fa';
 import './Header.css';
 import logo from '../../assets/lenovo-logo.png';
 import { useCart } from '../../store/CartContext';
+import { useAuth } from '../../store/AuthContext';
+import SearchBar from '../search/SearchBar';
+import AuthModal from '../auth/AuthModal';
 
 const Header = () => {
   const { getCartItemsCount, cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
+  const { user, isAuthenticated, logout, getUserInitials } = useAuth();
+
   const cartItemsCount = getCartItemsCount();
 
-  // Controla o hover do tooltip do carrinho
+  // UI
   const [showCartTooltip, setShowCartTooltip] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showLoginDropdown, setShowLoginDropdown] = useState(false);
+
+  // Refs
   const userMenuRef = useRef(null);
   const loginDropdownRef = useRef(null);
+  const cartContainerRef = useRef(null);
 
   // Cerrar menús al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setShowUserMenu(false);
       }
-      if (loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)) {
+      if (showLoginDropdown && loginDropdownRef.current && !loginDropdownRef.current.contains(event.target)) {
         setShowLoginDropdown(false);
       }
     };
@@ -31,19 +50,18 @@ const Header = () => {
     if (showUserMenu || showLoginDropdown) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showUserMenu, showLoginDropdown]);
 
   const handleAuthClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (isAuthenticated) {
-      setShowUserMenu(!showUserMenu);
+      setShowUserMenu((v) => !v);
+      setShowLoginDropdown(false);
     } else {
-      setShowLoginDropdown(!showLoginDropdown);
+      setShowLoginDropdown((v) => !v);
+      setShowUserMenu(false);
     }
   };
 
@@ -57,102 +75,151 @@ const Header = () => {
     setShowUserMenu(false);
   };
 
+  // MouseLeave seguro para el tooltip del carrito
+  const safeMouseLeave = (e) => {
+    const related = e.relatedTarget; // snapshot antes del timeout
+    setTimeout(() => {
+      if (!related || !cartContainerRef.current?.contains(related)) {
+        setShowCartTooltip(false);
+      }
+    }, 100);
+  };
+
   return (
     <header className="header">
-      {/* Faixa superior cinza (pode conter avisos / anúncios curtos) */}
+      {/* Faixa superior */}
       <div className="header__top__promo" />
 
       {/* Topo: Logo | Busca | Ícones */}
       <div className="header__top">
-        {/* Logo sempre leva para Home */}
+        {/* Logo */}
         <NavLink to="/" aria-label="Ir ao início">
           <img src={logo} alt="Lenovo" className="header__logo" />
         </NavLink>
 
-        {/* Centro: nossa barra de busca com autocomplete */}
+        {/* Busca */}
         <div className="header__search">
           <SearchBar />
         </div>
 
-        {/* Direita: Ações rápidas (usuário, favoritos, carrinho) */}
+        {/* Ações rápidas */}
         <div className="header__icons">
-          <div className="header__user-section">
-            <FaUser className="header__icon" />
-            <span className="header__user-text">Iniciar sessão / Criar conta</span>
+          {/* Usuario / Auth */}
+          <div className="header__user-section" ref={isAuthenticated ? userMenuRef : loginDropdownRef}>
+            {isAuthenticated ? (
+              <>
+                <button className="header__user-info" onClick={handleAuthClick}>
+                  <div className="header__user-avatar">
+                    {typeof getUserInitials === 'function' ? getUserInitials(user) : (user?.nome?.[0] || 'U')}
+                  </div>
+                  <span className="header__user-name">Olá, {user?.nome?.split(' ')[0] || 'Usuário'}</span>
+                  <FaChevronDown className="header__dropdown-arrow" />
+                </button>
+
+                {showUserMenu && (
+                  <div className="header__user-menu">
+                    <NavLink
+                      to="/perfil"
+                      className="header__user-menu-item"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      Meu Perfil
+                    </NavLink>
+                    <button className="header__user-menu-item header__logout-btn" onClick={handleLogout}>
+                      Sair
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div
+                className="header__user-login"
+                onMouseEnter={() => setShowLoginDropdown(true)}
+                onMouseLeave={() => setShowLoginDropdown(false)}
+              >
+                <button className="header__user-login-btn" onClick={handleAuthClick}>
+                  <FaUser className="header__icon" />
+                  <span className="header__user-text">Iniciar sessão / Criar conta</span>
+                  <FaChevronDown className="header__dropdown-arrow" />
+                </button>
+
+                {showLoginDropdown && (
+                  <div className="header__login-dropdown">
+                    <div className="header__dropdown-title">Minha conta lenovo</div>
+                    <button className="header__login-btn" onClick={handleLoginButtonClick}>
+                      Iniciar sessão / Criar conta
+                    </button>
+                    <div className="header__dropdown-item">
+                      <FaUserCircle className="header__dropdown-icon" />
+                      <span>Perfil</span>
+                    </div>
+                    <div className="header__dropdown-item">
+                      <FaClipboardList className="header__dropdown-icon" />
+                      <span>Pedidos</span>
+                    </div>
+                    <div className="header__dropdown-item">
+                      <FaHeart className="header__dropdown-icon" />
+                      <span>Lista de desejos</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Favoritos (placeholder visual) */}
+          {/* Favoritos (placeholder) */}
           <FaHeart className="header__icon" />
 
-          {/* Carrinho com tooltip */}
+          {/* Carrinho */}
           <div
             className="header__cart-container"
+            ref={cartContainerRef}
             onMouseEnter={() => setShowCartTooltip(true)}
-            onMouseLeave={(e) => {
-              // Agregar un pequeño delay para permitir movimiento hacia el tooltip
-              setTimeout(() => {
-                const relatedTarget = e.relatedTarget;
-                if (!relatedTarget || !e.currentTarget.contains(relatedTarget)) {
-                  setShowCartTooltip(false);
-                }
-              }, 100);
-            }}
+            onMouseLeave={safeMouseLeave}
           >
-            {/* Link para a página do carrinho + badge de quantidade */}
+            {/* Link para a página do carrinho + badge */}
             <NavLink to="/cart" className="header__cart-link">
               <FaShoppingCart className="header__icon" />
-              {cartItemsCount > 0 && (
-                <span className="header__cart-badge">{cartItemsCount}</span>
-              )}
+              {cartItemsCount > 0 && <span className="header__cart-badge">{cartItemsCount}</span>}
             </NavLink>
 
-            {/* Tooltip do carrinho (só mostra quando hover + existem itens) */}
+            {/* Tooltip do carrinho */}
             {showCartTooltip && cartItems.length > 0 && (
               <div
                 className="header__cart-tooltip"
                 onMouseEnter={() => setShowCartTooltip(true)}
-                onMouseLeave={(e) => {
-                  setTimeout(() => {
-                    const relatedTarget = e.relatedTarget;
-                    if (!relatedTarget || !document.querySelector('.header__cart-container').contains(relatedTarget)) {
-                      setShowCartTooltip(false);
-                    }
-                  }, 100);
-                }}
+                onMouseLeave={safeMouseLeave}
               >
                 <div className="cart-tooltip__header">
-                  <h3>
-                    Carrinho ({cartItemsCount} {cartItemsCount === 1 ? "item" : "itens"})
-                  </h3>
+                  <h3>Carrinho ({cartItemsCount} {cartItemsCount === 1 ? 'item' : 'itens'})</h3>
                 </div>
 
                 <div className="cart-tooltip__items">
                   {cartItems.map((item) => (
                     <div key={item.id} className="cart-tooltip__item">
                       <div className="cart-tooltip__item-header">
-                        {/* Imagem do produto (mostra bloco "sem imagem" caso falhe) */}
                         <img
-                          src={item.imagens?.[0]?.url || ""}
+                          src={item.imagens?.[0]?.url || ''}
                           alt={item.nome}
                           className="cart-tooltip__item-image"
                           onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                            e.currentTarget.nextElementSibling.style.display = "flex";
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling.style.display = 'flex';
                           }}
                         />
                         <div
                           style={{
-                            display: "none",
+                            display: 'none',
                             width: 50,
                             height: 50,
-                            backgroundColor: "#f7f7f7",
+                            backgroundColor: '#f7f7f7',
                             borderRadius: 4,
-                            border: "1px solid #eee",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            color: "#999",
+                            border: '1px solid #eee',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#999',
                             fontSize: 10,
-                            textAlign: "center",
+                            textAlign: 'center',
                           }}
                         >
                           Sem imagem
@@ -164,7 +231,6 @@ const Header = () => {
                       </div>
 
                       <div className="cart-tooltip__item-bottom">
-                        {/* Controles: remover/menos/mais (integra com CartContext) */}
                         <div className="cart-tooltip__item-controls">
                           <button
                             onClick={(e) => {
@@ -176,9 +242,9 @@ const Header = () => {
                               }
                             }}
                             className="cart-tooltip__control-btn cart-tooltip__remove-btn"
-                            title={item.quantity > 1 ? "Diminuir quantidade" : "Remover produto"}
+                            title={item.quantity > 1 ? 'Diminuir quantidade' : 'Remover produto'}
                           >
-                            <FaTrash />
+                            {item.quantity > 1 ? <FaMinus /> : <FaTrash />}
                           </button>
 
                           <span className="cart-tooltip__quantity">{item.quantity}</span>
@@ -194,10 +260,9 @@ const Header = () => {
                           </button>
                         </div>
 
-                        {/* Preço total deste item (quantidade x preço unitário) */}
                         <div className="cart-tooltip__item-price">
                           R$
-                          {(item.preco * item.quantity).toLocaleString("pt-BR", {
+                          {(Number(item.preco) * Number(item.quantity)).toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
                           })}
                         </div>
@@ -206,16 +271,15 @@ const Header = () => {
                   ))}
                 </div>
 
-                {/* Rodapé do tooltip: total + CTA para ver carrinho completo */}
                 <div className="cart-tooltip__footer">
                   <div className="cart-tooltip__total">
                     <strong>
                       Total: R$
-                      {getCartTotal().toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                      {Number(getCartTotal()).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </strong>
                   </div>
-                  <NavLink 
-                    to="/cart" 
+                  <NavLink
+                    to="/cart"
                     className="cart-tooltip__view-cart-btn"
                     onClick={() => setShowCartTooltip(false)}
                   >
@@ -232,9 +296,7 @@ const Header = () => {
       <nav className="header__nav">
         <ul className="header__nav--left">
           <li className="has-submenu">
-            <NavLink to="/" end>
-              Home
-            </NavLink>
+            <NavLink to="/" end>Home</NavLink>
           </li>
           <li className="has-submenu">
             <NavLink to="/produtos">Loja</NavLink>
@@ -246,33 +308,25 @@ const Header = () => {
             <NavLink to="/contato">Contato</NavLink>
           </li>
         </ul>
-
         <ul className="header__nav--right">
-          <li>
-            <NavLink to="/empresa">Empresa</NavLink>
-          </li>
-          <li>
-            <NavLink to="/educacao">Educação</NavLink>
-          </li>
-          <li>
-            <NavLink to="/gaming">Gaming</NavLink>
-          </li>
+          <li><NavLink to="/empresa">Empresa</NavLink></li>
+          <li><NavLink to="/educacao">Educação</NavLink></li>
+          <li><NavLink to="/gaming">Gaming</NavLink></li>
         </ul>
       </nav>
 
-      {/* Faixa inferior do menu (chamada para programas/pro) */}
+      {/* Faixa inferior */}
       <div className="header__bottom">
         <p>
           <strong>LenovoPro.</strong> Conheça nossos programas exclusivos de descontos e benefícios
           para empresas. <strong>Cadastre-se gratuitamente.</strong>
         </p>
       </div>
-      
+
       {/* Modal de Autenticação */}
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-      />
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </header>
   );
-}
+};
+
+export default Header;
