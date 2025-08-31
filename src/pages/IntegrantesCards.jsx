@@ -9,6 +9,7 @@ import { TiWorldOutline } from "react-icons/ti";
 import { IoBulbOutline } from "react-icons/io5";
 import { MdMailOutline } from "react-icons/md";
 import { MdOutlineWhatsapp } from "react-icons/md";
+import fundoLong from "../assets/fotosIntegrantes/fundoLong.png"
 
 
 export default function IntegrantesCards() {

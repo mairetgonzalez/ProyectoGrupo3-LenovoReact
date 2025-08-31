@@ -1,6 +1,6 @@
 .produtos article:hover {
-  border: 1px solid #000; /* borde negro al pasar el mouse */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* sombra */
-  cursor: pointer; /* opcional, indica que es interactivo */
-  transition: all 0.3s ease; /* suaviza la transición */
+  border: 1px solid #000; 
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer; 
+  transition: all 0.3s ease; 
 }

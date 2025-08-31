@@ -1,28 +1,65 @@
 .SobreNos {
     display: grid;
-    grid-template-columns: repeat(3, 400px);
-    gap: 40px;
+    grid-template-columns: repeat(3, 335px);
+    gap: 10px;
     justify-content: center;
     font-family: Lato, Helvetica, Arial, sans-serif;
-    padding: 16px;
+    background-color: #f2f2f2;
+    padding-bottom: 100px;
 }
 
-.retangulo {
-    width: 250px;
-    height: 40px;
-    background-color: #E1251B;
-    margin: 0 auto;
+.imgQuemSomosContainer {
+    position: relative;
+    width: 100%;
 }
 
-.tituloIntegrantes {
-    font-family: 'Audiowide', cursive;
-    text-align: center;
-    font-size: 28px;
-    color: #FFF;
-    margin-bottom: 24px;
+.imgQuemSomos {
+    width: 100%;
+    height: 459px;
+    display: block;
+    margin-bottom: 60px;
+}
+
+.textoSoreImagem {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 48px;
     font-weight: bold;
-    align-items: center;
+    text-align: center;
 }
+
+.totiLenovoVoke {
+    width: 76%;
+    margin: 24px auto;
+    font-size: 25px;
+    line-height: 1.8;
+    text-align: justify;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    color: #555;
+    font-weight: bold;
+    padding-bottom: 50px;
+}
+
+.integrantesTexto {
+    width: 100%;
+    font-size: 25px;
+    line-height: 1.8;
+    text-align: justify;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    color: #555;
+    font-weight: strong;
+    background-color: #f2f2f2;
+    padding-top: 70px;
+    padding-bottom: 40px;
+    padding-left: 12%;
+    padding-right: 14.5%;
+    box-sizing: border-box;
+}
+
+
 
 
 .integrantesCards {
@@ -30,16 +67,17 @@
     flex-direction: column;
     border: 1px solid #c5c3c3;
     border-radius: 8px;
-    background: white;
+    background: white url('../assets/fotosIntegrantes/fundoLong.png') no-repeat center center;
+    background-size: cover;
     overflow: hidden;
     padding: 12px;
-    width: 350px;
+    width: 340px;
     height: auto;
 }
 
 .integrantesCards:hover {
     flex-direction: column-reverse;
-    border: 2px solid #c5c3c3;
+    border: 2px solid #294E95;
     box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -52,7 +90,7 @@
 }
 
 .nomeIntegrante {
-    color: rgb(41, 78, 149);
+    color: white;
     text-align: center;
     font-size: 30px;
     margin: 5px 5px 15px 5px;
@@ -78,6 +116,15 @@ p {
     color: black;
     margin-right: 8px;
     font-size: 20px;
+    color: white;
+
+}
+
+.contatoIntegrante {
+    color: white;
+    margin-left: 42px;
+    margin-top: 15px;
+
 }
 
 .interesseIntegrante {
@@ -89,6 +136,8 @@ p {
 
 .interesseIntegrante .icon {
     flex-shrink: 0;
+    color: white;
+
 }
 
 .rowIdadePais,
@@ -97,7 +146,10 @@ p {
 .emailIntegrante,
 .telefoneIntegrante {
     margin: 3px 0;
-    font-size: 16px; /*Entre 16px e 18px*/
+    font-size: 16px;
+    /*Entre 16px e 18px*/
+    color: white;
+
 }
 
 .profissaoIntegrante {
@@ -105,13 +157,60 @@ p {
     align-items: center;
     margin-top: 10px;
     margin-bottom: 5px;
-    margin-left: 24px; /* solo el texto se desplaza, el ícono queda normal */
+    margin-left: 24px;
+    color: white;
+
 }
 
 .profissaoIntegrante .icon {
-    margin-left: -7px; /* quita el extra que tenías */
-    margin-right: 8px; /* mantiene espacio entre icono y texto */
+    margin-left: -7px;
+    margin-right: 8px;
+    color: white;
+
 }
+
+.textProjeto {
+    width: 75%;
+    margin: 50px auto;
+    font-size: 28px;
+    font-weight: 800;
+    color: #555;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+}
+
+.quadroBox{
+    width: 76%;
+    border: 1px solid #555;
+    border-left: 6px solid #2507d1;
+    background-color: #f9f9f9;
+    padding: 16px;
+    margin: 20px auto;
+}
+
+.quadroBox2{
+    padding-top: 30px;
+    padding-bottom: 80px;
+}
+
+
+.tituloBox {
+    font-size: 22px;
+    font-weight: 800;
+    color: #555;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    margin: 20px 0px;
+}
+
+.textBox {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #555;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+
 
 /* Fuente de letra:
 <link rel="preconnect" href="https://fonts.googleapis.com">
