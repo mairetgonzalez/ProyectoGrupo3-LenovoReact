@@ -1,0 +1,106 @@
+.pay{
+  background-color: var(--lenovo-light-gray);
+  padding: 32px 0 40px;
+}
+
+.pay__title{
+  text-align:center;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 500;
+  margin: 0 0 16px;
+  color:#111;
+}
+
+.pay__grid{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Cards más pequeños */
+.pay__card{
+  background:#fff;
+  border:1px solid #e6e8ec;
+  border-radius: 14px;
+  padding: 12px 14px;        /* ↓ padding */
+  min-height: 78px;          /* ↓ altura */
+  display:flex;
+  align-items:center;
+  justify-content:center;    /* 👈 centra contenido */
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.pay__card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+}
+
+/* Fila centrada */
+.pay__row{
+  display:flex;
+  align-items:center;
+  justify-content:center;    /* 👈 centra imagen del chip */
+  gap: 12px;
+}
+
+/* Último card: título arriba, marcas abajo */
+.pay__card--brands{
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.pay__subtitle{
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 4px;           /* más pegado al bloque de marcas */
+  text-align: center;
+}
+
+/* Chips (boleto/pix) un poco más pequeños */
+.pay__chip-img{
+  height: 34px;              /* ↓ tamaño */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Fila de marcas con separadores */
+.pay__brands{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 12px;                 /* espacio entre marca y separador */
+  flex-wrap: nowrap;
+}
+
+.pay__brand-img{
+  height: 22px;              /* ↓ tamaño logos */
+  width: auto;
+  object-fit: contain;
+}
+
+.pay__divider{
+  display:inline-block;
+  width: 1px;
+  height: 20px;
+  background:#dcdde1;        /* línea separadora */
+}
+
+/* Texto opcional al final */
+
+.infoPayment{
+background-color: white;
+margin-top: 6rem;
+padding: 4rem 3rem 3rem;
+font-weight: 500;
+}
+
+
+/* Responsive */
+@media (max-width: 900px){
+  .pay__grid{ grid-template-columns: 1fr; }
+  .pay__brands{ flex-wrap: wrap; gap: 10px; }
+  .pay__divider{ display:none; }  /* sin barras en mobile para no saturar */
+}

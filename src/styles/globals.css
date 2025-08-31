@@ -6,7 +6,8 @@
   --lenovo-purple: #7a126b;       /* Roxo para destaques específicos */
   --lenovo-blue: #294e95;         /* Azul para links ou áreas especiais */
   --black: #000000;               /* Preto para textos e fundos */
-  --white: #ffffff;               /* Branco para fundos e textos */
+  --white: #ffffff;                 /* Branco para fundos e textos */
+  --lenovo-accent:#2563eb;       /* hover ícono */          
 
   /* 🔠 Tipografia e estilos base */
   --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* Fonte padrão */

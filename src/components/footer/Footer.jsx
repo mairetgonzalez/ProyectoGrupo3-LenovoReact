@@ -7,7 +7,6 @@ import './Footer.css';
 import facebookIcon from '../../assets/icons/icon-footer-facebook.svg';
 import instagramIcon from '../../assets/icons/icon-footer-instagram.svg';
 import linkedinIcon from '../../assets/icons/icon-footer-linkedin.svg';
-import xIcon from '../../assets/icons/icon-footer-twitter.svg';
 import youtubeIcon from '../../assets/icons/icon-footer-youtube.svg';
 
 // Seletor de país com react-select
@@ -38,19 +37,16 @@ export default function Footer() {
 
         {/* CENTRO: Ícones sociais */}
         <div className="footer-center footer-social">
-          <a className="social-pill" href="#" aria-label="Facebook">
+          <a className="social-pill" href="https://www.facebook.com/lenovobr/?locale=es_LA" aria-label="Facebook">
             <img src={facebookIcon} alt="" />
           </a>
-          <a className="social-pill" href="#" aria-label="Instagram">
+          <a className="social-pill" href="https://www.instagram.com/lenovobrasil/?hl=es" aria-label="Instagram">
             <img src={instagramIcon} alt="" />
           </a>
-          <a className="social-pill" href="#" aria-label="LinkedIn">
+          <a className="social-pill" href="https://www.linkedin.com/company/lenovo/" aria-label="LinkedIn">
             <img src={linkedinIcon} alt="" />
           </a>
-          <a className="social-pill" href="#" aria-label="X">
-            <img src={xIcon} alt="" />
-          </a>
-          <a className="social-pill" href="#" aria-label="YouTube">
+          <a className="social-pill" href="https://www.youtube.com/LenovoBrasil" aria-label="YouTube">
             <img src={youtubeIcon} alt="" />
           </a>
         </div>

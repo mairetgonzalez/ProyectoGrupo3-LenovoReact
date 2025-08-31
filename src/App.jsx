@@ -8,7 +8,6 @@ import Footer from './components/footer/Footer';
 import SobreNos from './pages/SobreNos';
 import ProductDetail from './pages/ProductDetail';
 import CartProvider from './store/CartContext';
-import { AuthProvider } from './store/AuthContext';
 
 
 // ✅ Home mínimo (si aún no tienes un Home.jsx)
@@ -17,10 +16,13 @@ function Home() {
   return (
     <>
       <HeroCarousel />
+      <Homepage />
       {/* aquí puedes agregar secciones: destacados, etc. */}
     </>
   );
 }
+
+
 
 export default function App(){
   return (
@@ -40,8 +42,8 @@ export default function App(){
           {/* Página del carrito */}
           <Route path="/cart" element={<Cart />} />
 
-          {/* Lista de integrantes */}
-          <Route path="/sobre" element={<SobreNos />} />
+        {/* Lista de integrantes */}
+        <Route path="/sobre" element={<SobreNos />} />
 
           {/* Redirección para rutas desconocidas */}
           <Route path="*" element={<Navigate to="/" replace />} />
