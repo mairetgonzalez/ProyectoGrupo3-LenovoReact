@@ -20,18 +20,53 @@
   z-index: 0; /* fondo */
 }
 
-/* Gradiente detrás del texto y sin bloquear clics */
-.hero-gradient {
+/* Gradiente lateral para contraste (izquierda → transparente) */
+.hero-gradient{
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.15) 0%,
-    rgba(0,0,0,0.35) 40%,
-    rgba(0,0,0,0.55) 100%
-  );
+  left: 0; top: 0; bottom: 0;
+  width: clamp(700px, 30vw, 480px);
+  background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,0));
   pointer-events: none;
   z-index: 1;   /* detrás del caption */
+}
+
+.hero-kicker{
+  display: inline-block;
+  font-weight: 600;
+  opacity: .95;
+  margin-bottom: 10px;
+}
+.hero-caption h2{
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.15;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.hero-caption button{
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 1rem 1.7rem;
+  font-size: 1.08rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,.14);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-caption button:hover{ 
+  background: #000; 
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+
+.hero-caption button:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
 }
 
 /* ------- CAPTION IZQUIERDA CON ESPACIO ------- */
@@ -94,20 +129,20 @@
 /* Tu variante clara por defecto (texto oscuro) */
 .hero-btn--light {
   background: #fff;
-  color: #000;
-  border: none;
-  padding: 1rem 1.7rem;
-  font-size: 1.08rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0,0,0,.14);
-  transition: background .19s;
+  color: #111;
 }
-.hero-caption button:hover{ background:#000; color:#fff }
 
-/* Gradiente lateral para contraste */
-.hero-gradient{
+/* ✅ HOVER que pediste: negro con letras blancas */
+.hero-btn:hover,
+.hero-btn--light:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.18);
+}
+
+/* ------- FLECHAS EN CÍRCULO OSCURO (solo las nuestras) ------- */
+.hero-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

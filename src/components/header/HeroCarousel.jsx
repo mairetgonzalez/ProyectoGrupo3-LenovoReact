@@ -65,7 +65,7 @@ const defaultSlides = [
   {
     imagen: banner3,
     titulo: "Lenovo Pro para Negocios",
-    desc1: "SEJA LENOVO PRO, LIGUE 0800-539-6361...",
+    desc1: "SEJA LENOVO PRO, LIGUE 0800-539-6361 OU FALE CONOSCO",
     desc2: "Sob medida para as necessidades do seu negócio.",
     boton: "Saiba Mais",
     link: "/contatos",

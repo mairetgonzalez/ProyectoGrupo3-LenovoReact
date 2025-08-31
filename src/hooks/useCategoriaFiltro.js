@@ -1,4 +1,66 @@
 // src/hooks/useCategoriaFiltro.js
+
+// src/hooks/useCategoriaFiltro.js
+import { useLocation } from "react-router-dom";
+import { useMemo } from "react";
+
+/** Mapa alineado con tu API:
+ *  1 Notebooks, 2 Desktops, 3 Smartphones, 4 Tablets, 5 Monitores
+ */
+export const CAT = {
+  notebooks: { id: 1, nome: "Notebooks", aliases: ["notebook","notebooks","laptop","laptops","portatil","portátil","note"] },
+  desktops:  { id: 2, nome: "Desktops",  aliases: ["desktop","desktops","computador","computadora","pc"] },
+  mobile:    { id: 3, nome: "Smartphones", aliases: ["smartphone","smartphones","celular","celulares","telefone","telefono","movil","móvil"] },
+  tablets:   { id: 4, nome: "Tablets",   aliases: ["tablet","tablets","tableta"] },
+  monitores: { id: 5, nome: "Monitores", aliases: ["monitor","monitores","pantalla","monitor tv"] },
+};
+
+// Normaliza: minúsculas, sin acentos y reduce letras repetidas (noteboook → notebook)
+export function norm(s) {
+  return String(s || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/(.)\1{2,}/g, "$1");
+}
+
+export function findCategoryBySlugOrAlias(value) {
+  const nv = norm(value);
+  for (const [slug, info] of Object.entries(CAT)) {
+    if (slug === nv) return { slug, ...info };
+    if (norm(info.nome) === nv) return { slug, ...info };
+    if ((info.aliases || []).some((a) => nv.includes(norm(a)) || norm(a).includes(nv))) {
+      return { slug, ...info };
+    }
+  }
+  return null;
+}
+
+/** Lee ?categoria=<slug> o infiere por ?q=<texto> (monitor, computador, noteboook, etc.) */
+export function useCategoriaFiltro() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const slug = params.get("categoria"); // p.ej. notebooks, desktops, monitores…
+  const q = params.get("q") || "";
+
+  return useMemo(() => {
+    let info = null;
+    if (slug) info = findCategoryBySlugOrAlias(slug);
+    if (!info && q) info = findCategoryBySlugOrAlias(q);
+
+    return {
+      ready: true,
+      categoriaId: info?.id || null,
+      categoriaNome: info?.nome || null,
+      categoriaSlug: info?.slug || null,
+      q: q.trim(),
+    };
+  }, [slug, q, location.search]);
+}
+
+
+
+/*
 import { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { listCategorias } from "../services/api";
@@ -98,3 +160,4 @@ export function useCategoriaFiltro() {
 
   return { ready, categoriaSlug, categoriaId, categoriaNome };
 }
+*/
