@@ -81,7 +81,7 @@ const Header = () => {
       if (!related || !cartContainerRef.current?.contains(related)) {
         setShowCartTooltip(false);
       }
-    }, 100);
+    }, 300);
   };
 
   return (

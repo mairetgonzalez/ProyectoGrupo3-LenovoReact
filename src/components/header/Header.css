@@ -360,7 +360,7 @@
   color: white;
   border-radius: 50%;
   width: 18px;
-  height: 18px;
+  height: 18px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,8 +377,19 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  margin-top: 8px;
+  margin-top: 4px;
   padding-top: 8px;
+}
+
+.header__cart-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px; 
+  left: 0;
+  right: 0;
+  height: 12px; 
+  background: transparent;
+  z-index: -1;
 }
 .cart-tooltip__header { padding: 16px; border-bottom: 1px solid #eee; }
 .cart-tooltip__header h3 { margin: 0; font-size: 16px; font-weight: 600; color: #333; }
