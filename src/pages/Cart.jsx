@@ -282,25 +282,6 @@ const Cart = () => {
                 </strong>
               </div>
 
-              {/* Botón reducir cantidad */}
-              <button
-                onClick={() => removeFromCart(item.id)}
-                style={{
-                  background: '#ffc107',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  padding: '8px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                title="Reducir cantidad"
-              >
-                <FaMinus />
-              </button>
-
               {/* Botón eliminar completamente */}
               <button
                 onClick={() => removeProductCompletely(item.id)}
