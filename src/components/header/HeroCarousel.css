@@ -2,7 +2,7 @@
 .hero-carousel {
   position: relative;
   overflow: hidden;
-  padding: 0 24px;
+  padding: 0;
 }
 
 /* Cada slide con esquinas redondeadas si quieres */
