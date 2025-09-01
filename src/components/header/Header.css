@@ -297,12 +297,19 @@
   background: #ededed;
   padding: 0.5rem;
   text-align: center;
+<<<<<<< HEAD
   font-size: 14px;
 }
 
 /* ---------- SearchBar (contenedor) ---------- */
 .searchbar {
   display: flex;
+=======
+  font-size: 15px;
+  height: 65px;
+  display: flex;         
+  justify-content: center;
+>>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
   align-items: center;
   max-width: 500px;
   width: 100%;
