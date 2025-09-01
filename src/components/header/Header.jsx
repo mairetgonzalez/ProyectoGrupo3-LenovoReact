@@ -12,12 +12,12 @@ import {
   FaChevronDown,
 } from 'react-icons/fa';
 import './Header.css';
-import Banner from './Banner';
 import logo from '../../assets/lenovo-logo.png';
 import { useCart } from '../../store/CartContext';
 import { useAuth } from '../../store/AuthContext';
 import SearchBar from '../search/SearchBar';
 import AuthModal from '../auth/AuthModal';
+import Banner from "./Banner"
 
 const Header = () => {
   const { getCartItemsCount, cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
@@ -25,18 +25,15 @@ const Header = () => {
 
   const cartItemsCount = getCartItemsCount();
 
-  // UI
   const [showCartTooltip, setShowCartTooltip] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showLoginDropdown, setShowLoginDropdown] = useState(false);
 
-  // Refs
   const userMenuRef = useRef(null);
   const loginDropdownRef = useRef(null);
   const cartContainerRef = useRef(null);
 
-  // Cerrar menús al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showUserMenu && userMenuRef.current && !userMenuRef.current.contains(event.target)) {
@@ -75,9 +72,8 @@ const Header = () => {
     setShowUserMenu(false);
   };
 
-  // MouseLeave seguro para el tooltip del carrito
   const safeMouseLeave = (e) => {
-    const related = e.relatedTarget; // snapshot antes del timeout
+    const related = e.relatedTarget;
     setTimeout(() => {
       if (!related || !cartContainerRef.current?.contains(related)) {
         setShowCartTooltip(false);
@@ -88,7 +84,7 @@ const Header = () => {
   return (
     <header className="header">
       {/* Faixa superior */}
-      <div className="header__top__promo" />
+      <div className="header_top_promo" />
 
       {/* Topo: Logo | Busca | Ícones */}
       <div className="header__top">
@@ -133,37 +129,20 @@ const Header = () => {
                     >
                       Meu Perfil
                     </NavLink>
-<<<<<<< HEAD
-                    <button className="header__user-menu-item header__logout-btn" onClick={handleLogout}>
-=======
-                    <button
-                      className="header__user-menu-item header__logout-btn"
-                      onClick={handleLogout}
-                    >
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
+                    <button className="header_user-menu-item header_logout-btn" onClick={handleLogout}>
                       Sair
                     </button>
                   </div>
                 )}
               </>
             ) : (
-<<<<<<< HEAD
-              <div className={`header__user-login ${showLoginDropdown ? 'is-open' : ''}`} ref={loginDropdownRef}>
+              <>
                 <button
                   type="button"
                   className="header__user-login-btn"
                   onClick={handleAuthClick}
                   aria-expanded={showLoginDropdown}
                 >
-=======
-              <div
-                className="header__user-section"
-                ref={loginDropdownRef}
-                onMouseEnter={() => setShowLoginDropdown(true)}
-                onMouseLeave={() => setShowLoginDropdown(false)}
-              >
-                <div className="header__user-login">
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
                   <FaUser className="header__icon" />
                   <span className="header__user-text">Iniciar sessão / Criar conta</span>
                   <FaChevronDown className="header__dropdown-arrow" />
@@ -171,26 +150,8 @@ const Header = () => {
 
                 {showLoginDropdown && (
                   <div className="header__login-dropdown">
-<<<<<<< HEAD
-                    <div className="header__dropdown-title">Minha conta lenovo</div>
+                    <div className="header__dropdown-title">Minha conta Lenovo</div>
                     <button className="header__login-btn" onClick={handleLoginButtonClick}>
-=======
-                    <div className="header__dropdown-title">
-                      Minha conta lenovo
-                    </div>
-                    <button
-                      className="header__login-btn"
-                      onClick={handleLoginButtonClick}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.background = "#fff";
-                        e.currentTarget.style.color = "#000";
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.background = "#000";
-                        e.currentTarget.style.color = "#fff";
-                      }}
-                    >
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
                       Iniciar sessão / Criar conta
                     </button>
 
@@ -219,30 +180,25 @@ const Header = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </>
             )}
           </div>
 
           {/* Favoritos (placeholder) */}
           <FaHeart className="header__icon" />
-<<<<<<< HEAD
 
           {/* Carrinho */}
-=======
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
           <div
             className="header__cart-container"
             ref={cartContainerRef}
             onMouseEnter={() => setShowCartTooltip(true)}
             onMouseLeave={safeMouseLeave}
           >
-            {/* Link para a página do carrinho + badge */}
             <NavLink to="/cart" className="header__cart-link">
               <FaShoppingCart className="header__icon" />
               {cartItemsCount > 0 && <span className="header__cart-badge">{cartItemsCount}</span>}
             </NavLink>
 
-            {/* Tooltip do carrinho */}
             {showCartTooltip && cartItems.length > 0 && (
               <div
                 className="header__cart-tooltip"
@@ -303,7 +259,6 @@ const Header = () => {
                               }
                             }}
                             className="cart-tooltip__control-btn cart-tooltip__remove-btn"
-<<<<<<< HEAD
                             title={item.quantity > 1 ? 'Diminuir quantidade' : 'Remover produto'}
                           >
                             {item.quantity > 1 ? <FaMinus /> : <FaTrash />}
@@ -311,13 +266,6 @@ const Header = () => {
 
                           <span className="cart-tooltip__quantity">{item.quantity}</span>
 
-=======
-                            title={item.quantity > 1 ? "Diminuir quantidade" : "Remover produto"}
-                          >
-                            <FaTrash />
-                          </button>
-                          <span className="cart-tooltip__quantity">{item.quantity}</span>
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
                           <button
                             onClick={(e) => {
                               e.preventDefault();
@@ -392,33 +340,14 @@ const Header = () => {
         </ul>
       </nav>
 
-<<<<<<< HEAD
       {/* Faixa inferior */}
-=======
-      {/* Banner verde inferior del menú */}
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
       <div className="header__bottom">
         <Banner />
       </div>
-      {/*<div className="header__bottom">
-        <p>
-          <strong>LenovoPro.</strong> Conheça nossos programas exclusivos de descontos e benefícios
-          para empresas. <strong>Cadastre-se gratuitamente.</strong>
-        </p>
-<<<<<<< HEAD
-      </div>
+
 
       {/* Modal de Autenticação */}
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
-=======
-      </div>*/}
-
-      {/* Modal de Autenticação */}
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-      />
->>>>>>> 21ec3ce (modifiquei: tirei botão amarelo de reducir cantidade do carrinho, modifiquei tamanho do banner, modifiquei tamanho da fonte)
     </header>
   );
 };
